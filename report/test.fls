@@ -1,6 +1,6 @@
-PWD c:\Users\Admin\Desktop\School\Georgia Tech\Coursework\ECE 6560\Final Project\ECE-6560--Final-Project
+PWD c:\Users\Admin\Desktop\School\Georgia Tech\Coursework\ECE 6560\Final Project\ECE-6560--Final-Project\report
 INPUT C:\Users\Admin\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\Admin\Desktop\School\Georgia Tech\Coursework\ECE 6560\Final Project\ECE-6560--Final-Project\test.tex
+INPUT c:\Users\Admin\Desktop\School\Georgia Tech\Coursework\ECE 6560\Final Project\ECE-6560--Final-Project\report\test.tex
 OUTPUT test.log
 INPUT C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\Admin\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
