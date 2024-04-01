@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{amssymb}
+\title{\textbf{ECE 6560 Final Project - Image Smoothing}}
+\author{Alexander Domagala}
+\date{Spring 2024}
+
+\begin{document}
+  \maketitle
+
+  \section{Problem Description}
+  Although image processing techniques began to appear around the 1960s, the proliferation of inexpensive
+  digital computing power has greatly widened the application pool. Image processing techniques
+  can now be found in areas such as digital photography, medical imaging, and object detection/tracking.
+  \\
+
+  \noindent
+  All these application areas can be affected by a very common problem: image noise.
+  Noise can render further processing ineffective, thus there exist a variety of approaches by which
+  we can attempt to smooth and denoise our images. Traditional image processing techniques
+  may rely on fixed kernels that can be swept over an image in order to smooth it. However,
+  this type of approach will result in uniform smoothing can blur the edges of an image.
+  \\
+
+  \noindent
+  We can instead leverage PDEs to describe how an image should be updated depending on its local characteristics.
+  More specifically, we will examine Ansiotropic Diffusion. This technique can be used to reduce image noise
+  while lessening the blurring that is done to edges. This project will attempt to develop PDEs that
+  can be used to reduce noise in high/low contrast images.
+  \\
+
+  \noindent
+  We need more information about the actual high/low contrast problem!
+  \\
+
+
+
+  \newpage
+  \section{Mathematical Modeling}
+  Before explicitly developing our PDEs, we must first understand what behavior we want our system to have.
+  The calculus of variations can be used to minimize an energy functional. The choice of setup for the
+  energy functional will determine the system behavior.
+  \\
+
+  \noindent
+  Let's begin by defining our image as
+    \begin{center}
+      $I(x,y)$
+    \end{center}
+  Note that the derivations in sections (2) and (3) are being performed
+  exclusively in continuous space: $x,y \in \mathbb{R}$.
+  \\
+  
+  \newpage
+  \noindent
+  Now, let's introduce the Euler-Lagrange equation:
+    \begin{center}
+      $L_{f} - \frac{\partial}{\partial x}L_{f'} = 0$
+    \end{center}
+  In two dimensions this is
+    \begin{center}
+      $L_{I} - \frac{\partial}{\partial x}L_{I_{x}} - \frac{\partial}{\partial y}L_{I_{y}} = 0$
+    \end{center}
+
+
+
+
+
+
+  \newpage
+  \section{Derivation of PDE}
+
+  \section{Discretization and Implementation}
+
+
+  \section{Experimental Results}
+
+
+  \section{Summary}
+
+\end{document}
