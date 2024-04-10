@@ -1,0 +1,2 @@
+https://en.wikipedia.org/wiki/Total_variation_denoising
+Rudin-Osher-Fatemi PDE
