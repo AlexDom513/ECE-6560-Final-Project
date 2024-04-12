@@ -52,14 +52,6 @@
   
   \newpage
   \noindent
-  Now, let's introduce the Euler-Lagrange equation:
-    \begin{center}
-      $L_{f} - \frac{\partial}{\partial x}L_{f'} = 0$
-    \end{center}
-  In two dimensions this is
-    \begin{center}
-      $L_{I} - \frac{\partial}{\partial x}L_{I_{x}} - \frac{\partial}{\partial y}L_{I_{y}} = 0$
-    \end{center}
 
 
 
@@ -68,6 +60,57 @@
 
   \newpage
   \section{Derivation of PDE}
+
+    \noindent Now, let's introduce the Euler-Lagrange equation:
+      \begin{center}
+        \begin{tabular}{l}
+        $L_{f} - \frac{\partial}{\partial x}L_{f'} = 0$ (1-D)\\
+        $L_{I} - \frac{\partial}{\partial x}L_{I_{x}} - \frac{\partial}{\partial y}L_{I_{y}} = 0$ (2-D)\\
+        \end{tabular}
+      \end{center}
+
+    \noindent
+    We can begin working towards obtaining our PDE by setting up a gradient descent:
+      \begin{center}
+        \begin{tabular}{l}
+          $I_{t} = -\nabla_{I}E$\\
+          $I_{t} = -L_{I} + \frac{\partial}{\partial x}L_{I_{x}} + \frac{\partial}{\partial y}L_{I_{y}}$
+        \end{tabular}
+      \end{center}
+
+    \noindent
+    We will now have to compute terms $L_{I}$, $L_{I_{x}}$, $L_{I_{y}}$ using the previously obtained energy functional:
+      \begin{center}
+        \begin{tabular}{l}
+          \vspace{12pt}
+          $L(I,I_{x},I_{y},x,y) = \frac{\lambda}{1+e^{\alpha}}$, where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|)$\\
+          
+          %LI
+          $L_{I} = \frac{\partial}{\partial I}(L)$\\
+          $L_{I} = 0$\\
+          
+          %LIx
+          $L_{I_{x}} = \frac{\partial}{\partial I_{x}}(L)$\\
+          $L_{I_{x}} = \frac{\lambda}{\beta}      \frac{e^\alpha}{(1+e^{\alpha})^2}       \frac{I_{x}}{\sqrt{I_{x}^2 + I_{y}^2}}$\\
+
+          %LIy
+          $L_{I_{y}} = \frac{\partial}{\partial I_{y}}(L)$\\
+          $L_{I_{y}} = \frac{\lambda}{\beta}      \frac{e^\alpha}{(1+e^{\alpha})^2}       \frac{I_{y}}{\sqrt{I_{x}^2 + I_{y}^2}}$\\
+        \end{tabular}
+      \end{center}
+
+      \noindent
+      Now that we have obtained our expressions for $L_{I_{x}}$ and $L_{I_{y}}$, we must compute their partial derivatives
+      as shown by the Euler-Lagrange equation.
+
+
+
+
+
+
+
+
+
 
   \section{Discretization and Implementation}
 
