@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{amssymb}
+\usepackage{amsmath}
 \title{\textbf{ECE 6560 Final Project - Image Smoothing}}
 \author{Alexander Domagala}
 \date{Spring 2024}
@@ -58,50 +59,164 @@
 
 
 
+
+
+
+
   \newpage
   \section{Derivation of PDE}
 
-    \noindent Now, let's introduce the Euler-Lagrange equation:
+    \noindent Now, let's introduce the Euler-Lagrange equation
       \begin{center}
         \begin{tabular}{l}
-        $L_{f} - \frac{\partial}{\partial x}L_{f'} = 0$ (1-D)\\
-        $L_{I} - \frac{\partial}{\partial x}L_{I_{x}} - \frac{\partial}{\partial y}L_{I_{y}} = 0$ (2-D)\\
+          $L_{f} - \frac{\partial}{\partial x}L_{f'} = 0$ (1-D)\\
+          $L_{I} - \frac{\partial}{\partial x}L_{I_{x}} - \frac{\partial}{\partial y}L_{I_{y}} = 0$ (2-D)\\
         \end{tabular}
       \end{center}
+    \vspace{12pt}
 
     \noindent
-    We can begin working towards obtaining our PDE by setting up a gradient descent:
+    We can begin working towards obtaining our PDE by setting up a gradient descent
       \begin{center}
         \begin{tabular}{l}
           $I_{t} = -\nabla_{I}E$\\
           $I_{t} = -L_{I} + \frac{\partial}{\partial x}L_{I_{x}} + \frac{\partial}{\partial y}L_{I_{y}}$
         \end{tabular}
       \end{center}
+    \vspace{12pt}
 
     \noindent
-    We will now have to compute terms $L_{I}$, $L_{I_{x}}$, $L_{I_{y}}$ using the previously obtained energy functional:
+    We will now have to compute terms $L_{I}$, $L_{I_{x}}$, $L_{I_{y}}$ using the previously obtained energy functional
       \begin{center}
         \begin{tabular}{l}
           \vspace{12pt}
           $L(I,I_{x},I_{y},x,y) = \frac{\lambda}{1+e^{\alpha}}$, where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|)$\\
-          
-          %LI
           $L_{I} = \frac{\partial}{\partial I}(L)$\\
           $L_{I} = 0$\\
-          
-          %LIx
           $L_{I_{x}} = \frac{\partial}{\partial I_{x}}(L)$\\
-          $L_{I_{x}} = \frac{\lambda}{\beta}      \frac{e^\alpha}{(1+e^{\alpha})^2}       \frac{I_{x}}{\sqrt{I_{x}^2 + I_{y}^2}}$\\
-
-          %LIy
+          $L_{I_{x}} = \frac{\lambda}{\beta} \frac{e^\alpha}{(1+e^{\alpha})^2} \frac{I_{x}}{\sqrt{I_{x}^2 + I_{y}^2}}$\\
           $L_{I_{y}} = \frac{\partial}{\partial I_{y}}(L)$\\
-          $L_{I_{y}} = \frac{\lambda}{\beta}      \frac{e^\alpha}{(1+e^{\alpha})^2}       \frac{I_{y}}{\sqrt{I_{x}^2 + I_{y}^2}}$\\
+          $L_{I_{y}} = \frac{\lambda}{\beta} \frac{e^\alpha}{(1+e^{\alpha})^2} \frac{I_{y}}{\sqrt{I_{x}^2 + I_{y}^2}}$\\
         \end{tabular}
       \end{center}
+      \vspace{12pt}
 
-      \noindent
-      Now that we have obtained our expressions for $L_{I_{x}}$ and $L_{I_{y}}$, we must compute their partial derivatives
-      as shown by the Euler-Lagrange equation.
+    \noindent
+    Now that we have obtained our expressions for $L_{I_{x}}$ and $L_{I_{y}}$, we must compute their partial derivatives
+    as shown by the Euler-Lagrange equation. This will be shown for $\frac{\partial}{\partial x}L_{I_{x}}$. $\frac{\partial}{\partial y}L_{I_{y}}$ will be obtained by examining
+    the expression of $\frac{\partial}{\partial x}L_{I_{x}}$.\\
+
+    \noindent
+    Let $\phi$ denote $\frac{e^\alpha}{(1+e^{\alpha})^2}$ and let $\gamma$ denote $\frac{I_{x}}{\sqrt{I_{x}^2 + I_{y}^2}}$.
+    We can begin finding $\frac{\partial}{\partial x}L_{I_{x}}$ by using the product-rule $\frac{\partial}{\partial x}(\gamma)\phi + \frac{\partial}{\partial x}(\phi)\gamma$.
+    We will start with the left side of the sum. Note that we must include $\frac{\lambda}{\beta}$ in the final expression.\\
+    \begin{center}
+      \begin{tabular}{l}
+        $\frac{\partial}{\partial x}(\gamma)\phi$\\
+        $\frac{\partial}{\partial x}(\frac{I_{x}}{\sqrt{I_{x}^2 + I_{y}^2}})\phi$\\
+        $(\frac{I_{xx}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}} + \frac{I_{x}}{(I_{x}^2 + I_{y}^2)^\frac{3}{2}}(I_{x}I_{xx} + I_{y}I_{xy}))\phi$
+      \end{tabular}
+    \end{center}
+    \vspace{12pt}
+    
+
+
+
+
+
+
+
+
+
+    \newpage
+    \noindent
+    We can now examine the right side of $\frac{\partial}{\partial x}(\gamma)\phi + \frac{\partial}{\partial x}(\phi)\gamma$.
+    \begin{center}
+      \begin{tabular}{l}
+        $\frac{\partial}{\partial x}(\phi)\gamma$\\
+        $\frac{\partial}{\partial x}(\frac{e^\alpha}{(1+e^{\alpha})^2})\gamma$\\
+        $\frac{\partial}{\partial x}((e^\alpha)(1+e^{\alpha})^{-2})\gamma$\\
+      \end{tabular}
+    \end{center}
+
+    \noindent
+    We see that we will need to again perform the product-rule between $(e^\alpha)$ and\\
+    $(1+e^{\alpha})^{-2}$. Taking the partial derivative of $(e^\alpha)$
+    \begin{center}
+      \begin{tabular}{l}
+        $-\frac{1}{\beta} e^{\alpha} \frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}} (I_{x}I_{xx}+I_{y}I_{xy})$
+      \end{tabular}
+    \end{center}
+
+    \noindent
+    Taking the partial derivative of $(1+e^{\alpha})^{-2}$
+    \begin{center}
+      \begin{tabular}{l}
+        $-2(1+e^{\alpha})^{-3} (-\frac{1}{\beta} e^{\alpha} \frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}} (I_{x}I_{xx}+I_{y}I_{xy})) $
+      \end{tabular}
+    \end{center}
+
+    \noindent
+    Thus, after factoring common terms, $\frac{\partial}{\partial x}((e^\alpha)(1+e^{\alpha})^{-2})$ yields
+    \begin{center}
+      \begin{tabular}{l}
+        $[-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]$\\
+      \end{tabular}
+    \end{center}
+    \vspace{12pt}
+    \vspace{12pt}
+
+  \noindent
+  We have reached the final expression for $\frac{\partial}{\partial x}L_{I_{x}}$
+  \begin{center}
+    \begin{tabular}{l}
+      \vspace{12pt}
+      $\frac{\partial}{\partial x}L_{I_{x}} =$\\
+      \vspace{12pt}
+      $\frac{\lambda}{\beta}[ (\frac{I_{xx}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) - (\frac{I_{x}}{(I_{x}^2 + I_{y}^2)^\frac{3}{2}}) (I_{x}I_{xx} + I_{y}I_{xy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+      \vspace{12pt}
+      $(\frac{I_{x}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$
+    \end{tabular}
+  \end{center}
+  \vspace{12pt}
+
+  \noindent
+    $\frac{\partial}{\partial y}L_{I_{y}}$ can be obtained by modifying $\frac{\partial}{\partial x}L_{I_{x}}$
+    \begin{center}
+      \begin{tabular}{l}
+        \vspace{12pt}
+        $\frac{\partial}{\partial y}L_{I_{y}} =$\\
+        \vspace{12pt}
+        $\frac{\lambda}{\beta}[ (\frac{I_{yy}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) - (\frac{I_{y}}{(I_{x}^2 + I_{y}^2)^\frac{3}{2}}) (I_{x}I_{xy} + I_{y}I_{yy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+        \vspace{12pt}
+        $(\frac{I_{y}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) (I_{x}I_{xy}+I_{y}I_{yy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$
+      \end{tabular}
+    \end{center}
+    \vspace{12pt}
+
+
+
+
+
+    \newpage
+    \noindent
+    Our final gradient-descent PDE is
+    \begin{center}
+      \begin{tabular}{l}
+        \vspace{12pt}
+        $I_{t} = \frac{\lambda}{\beta}[ (\frac{I_{xx}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) - (\frac{I_{x}}{(I_{x}^2 + I_{y}^2)^\frac{3}{2}}) (I_{x}I_{xx} + I_{y}I_{xy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+        \vspace{12pt}
+        $(\frac{I_{x}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]+ $\\
+        \vspace{12pt}
+        $(\frac{I_{yy}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) - (\frac{I_{y}}{(I_{x}^2 + I_{y}^2)^\frac{3}{2}}) (I_{x}I_{xy} + I_{y}I_{yy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+        \vspace{12pt}
+        $(\frac{I_{y}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) (I_{x}I_{xy}+I_{y}I_{yy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$
+        \vspace{12pt}
+      \end{tabular}
+    \end{center}
+
+    \noindent
+    Where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|)$\\
 
 
 
@@ -112,6 +227,33 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  \newpage
   \section{Discretization and Implementation}
 
 
