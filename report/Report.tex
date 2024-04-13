@@ -62,7 +62,11 @@
 
 
 
-
+    
+    
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Derivation of PDE
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
   \section{Derivation of PDE}
 
@@ -119,15 +123,6 @@
     \end{center}
     \vspace{12pt}
     
-
-
-
-
-
-
-
-
-
     \newpage
     \noindent
     We can now examine the right side of $\frac{\partial}{\partial x}(\gamma)\phi + \frac{\partial}{\partial x}(\phi)\gamma$.
@@ -194,10 +189,6 @@
     \end{center}
     \vspace{12pt}
 
-
-
-
-
     \newpage
     \noindent
     Our final gradient-descent PDE is
@@ -220,22 +211,119 @@
 
 
 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Discretization and Implementation
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \newpage
+  \section{Discretization and Implementation}
+  \noindent
+  The PDE that was obtained in the previous section is only applicable for continuous
+  time and space variables. We must discretize the PDE so that it can actually be implemented in software.\\
 
+  \noindent
+  Before explicitly discretizing the PDE, we must also obtain numeric approximations for its partial
+  derivatives. Beginning with the left side of the PDE, let's approximate $I_{t}$. 
+  It is important to understand that the PDE is defining how the image will be smoothed
+  over successive iterations. In other words, it specifies how the image is updated as time increases.
+  Thus, it is appropriate to use a forward difference.\\
 
+  \noindent
+  The forward difference for a single (space) variable can be obtained using the 
+  numeric differentiation method shown in class
+  \begin{center}
+    \begin{tabular}{l}
+      $f(x,t) = f(x,t)$\\
+      $f(x,t+\Delta t) = f(x,t) + \Delta t f'(x,t) + O(\Delta t^2)$\\
+    \end{tabular}
+  \end{center}
 
+  \noindent
+  After eliminating $f(x,t)$ terms on the right side of the above equations,
+  we obtain our approximation. Note that the approximation includes an error term $O(\Delta t)$.
+  \begin{center}
+    \begin{tabular}{l}
+      $f'(x,t) = \frac{f(x,t+\Delta t) - f(x,t)}{\Delta t}$\\
+    \end{tabular}
+  \end{center}
 
+  \noindent
+  Expanding this process to two (space) dimensions yields
+  \begin{center}
+    \begin{tabular}{l}
+      $I_{t}(x,y,t) = \frac{I(x,y,t+\Delta t) - I(x,y,t)}{\Delta t}$\\
+    \end{tabular}
+  \end{center}
+  \vspace{12pt}
 
+  \noindent
+  Continuing with the right side of the PDE, approximations are needed for the following partial
+  derivatives: $I_{x}$, $I_{y}$, $I_{xx}$, $I_{yy}$, and $I_{xy}$. Since these approximations
+  capture how the image is changing with respect to space, it is more appropriate to use a
+  central difference rather than a forward difference.\\
+  
+  \noindent
+  Suppose we are trying to approximate
+  $I_{x}$. A forward difference would introduce some bias because the value of $I_{x}$ at
+  a certain point is dependent on an adjacent image value in the positive x-direction only.
+  The central difference will balance out the value of $I_{x}$ since both directions
+  are considered. This will make the approximation more robust to variations in image content. \\
 
+  \newpage
+  \noindent
+  The central difference for a single (space) variable can be obtained using the
+  numeric differentiation method shown in class
+  \begin{center}
+    \begin{tabular}{l}
+      $f(x,t) = f(x,t)$\\
+      $f(x+\Delta x,t) = f(x,t) + \Delta x f'(x,t) + O(\Delta x^2)$\\
+      $f(x-\Delta x,t) = f(x,t) - \Delta x f'(x,t) + O(\Delta x^2)$\\
+    \end{tabular}
+  \end{center}
 
+  \noindent
+  After eliminating $f(x,t)$ terms on the right side of the above equations,
+  we obtain our approximation. Note that the approximation includes an error term $O(\Delta x)$.
+  \begin{center}
+    \begin{tabular}{l}
+      $f'(x,t) = \frac{f(x+\Delta x,t) - f(x-\Delta x,t)}{2\Delta x}$\\
+    \end{tabular}
+  \end{center}
 
+  \noindent
+  Expanding this process to two (space) dimensions yields
+  \begin{center}
+    \begin{tabular}{l}
+      \vspace{12pt}
+      $I_{x}(x,y,t) = \frac{I(x+\Delta x,y,t) - I(x-\Delta x,y,t)}{2\Delta x}$\\
+      \vspace{12pt}
+      $I_{y}(x,y,t) = \frac{I(x,y+\Delta y,t) - I(x,y-\Delta y,t)}{2\Delta y}$\\
+    \end{tabular}
+  \end{center}
 
+  \noindent
+  In order to obtain approximations for $I_{xx}$ and $I_{yy}$, we can simply add additional
+  terms to the Taylor Series expansion and then repeat the elimination process
+  \begin{center}
+    \begin{tabular}{l}
+      \vspace{12pt}
+      $I_{xx}(x,y,t) = \frac{I(x+\Delta x,y,t) - 2I(x,y,t) + I(x-\Delta x,y,t)}{\Delta x^{2}}$\\
+      \vspace{12pt}
+      $I_{yy}(x,y,t) = \frac{I(x,y+\Delta y,t) - 2I(x,y,t) + I(x,y-\Delta y,t)}{\Delta y^{2}}$\\
+    \end{tabular}
+  \end{center}
+  \vspace{12pt}
 
-
-
-
-
-
-
+  \noindent
+  Finally, we need to obtain an approximation for the mixed partial derivative $I_{xy}$.
+  This is achieved by taking the central difference approximation for $I_{x}$ and 
+  applying another central difference using $\Delta y$
+  \begin{center}
+    \begin{tabular}{l}
+      \vspace{12pt}
+      $I_{xy}(x,y,t) = \frac{I(x+\Delta x,y,t) - 2I(x,y,t) + I(x-\Delta x,y,t)}{\Delta x^{2}}$\\
+    \end{tabular}
+  \end{center}
+  \vspace{12pt}
 
 
 
@@ -254,9 +342,6 @@
 
 
   \newpage
-  \section{Discretization and Implementation}
-
-
   \section{Experimental Results}
 
 
