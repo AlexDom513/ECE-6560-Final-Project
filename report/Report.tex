@@ -316,11 +316,17 @@
   \noindent
   Finally, we need to obtain an approximation for the mixed partial derivative $I_{xy}$.
   This is achieved by taking the central difference approximation for $I_{x}$ and 
-  applying another central difference using $\Delta y$
+  applying another central difference with respect to $y$
   \begin{center}
     \begin{tabular}{l}
       \vspace{12pt}
-      $I_{xy}(x,y,t) = \frac{I(x+\Delta x,y,t) - 2I(x,y,t) + I(x-\Delta x,y,t)}{\Delta x^{2}}$\\
+      $I_{x}(x,y,t) = \frac{I(x+\Delta x,y,t)}{2\Delta x} - \frac{I(x-\Delta x,y,t)}{2\Delta x}$\\
+      \vspace{12pt}
+      $I_{xy}(x,y,t) = \frac{\partial}{\partial y}(\frac{I(x+\Delta x,y,t)}{2\Delta x}) - \frac{\partial}{\partial y}(\frac{I(x-\Delta x,y,t)}{2\Delta x})$\\
+      \vspace{12pt}
+      $I_{xy}(x,y,t) = \frac{1}{2\Delta y}(\frac{I(x+\Delta x,y+\Delta y,t)}{2\Delta x} - \frac{I(x+\Delta x,y-\Delta y,t)}{2\Delta x}) - \frac{1}{2\Delta y}(\frac{I(x-\Delta x,y+\Delta y,t)}{2\Delta x} - \frac{I(x-\Delta x,y-\Delta y,t)}{2\Delta x})$\\
+      \vspace{12pt}
+      $I_{xy}(x,y,t) = \frac{I(x+\Delta x,y+\Delta y,t) - I(x+\Delta x,y-\Delta y,t) - I(x-\Delta x,y+\Delta y,t) + I(x-\Delta x,y-\Delta y,t)}{4 \Delta x\Delta y} $ \\
     \end{tabular}
   \end{center}
   \vspace{12pt}
