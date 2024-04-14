@@ -339,7 +339,36 @@
   First, we will examine what is an appropriate time-step $\Delta t$. Previously,
   we defined $I_{t}(x,y,t) = \frac{I(x,y,t+\Delta t) - I(x,y,t)}{\Delta t}$. In our implementation,
   $\Delta t$ will multiply the right side of the PDE. The product will then be added to
-  the current image to obtain the updated image.\\
+  the current image to obtain the updated image. Thus, we must find a CFL condition
+  so that we can find an appropriate time-step. Recall that during the derivation of
+  the PDE, a term $\epsilon$ was included so that $\| \nabla_{I} \| = \sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}$.
+  Suppose the gradient became very small, all terms $I_{x}$ and $I_{y}$ in the PDE would go to zero and 
+  we would be left with $I_{t} = \frac{\lambda}{\beta}[(\frac{I_{xx}+I_{yy}}{(\epsilon^2)^\frac{1}{2}})]$.
+  Then we simply have the heat equation
+  \begin{center}
+    \begin{tabular}{l}
+      $I_{t} = \frac{\lambda}{\beta \epsilon}\Delta I$
+    \end{tabular}
+  \end{center}
+
+  \noindent
+  We can include our constants with the form of the CFL condition for the two-dimensional linear heat equation
+  as shown in class
+  \begin{center}
+    \begin{tabular}{l}
+      \vspace{12pt}
+      $\frac{\lambda}{\beta \epsilon} \leq \frac{1}{4} \Delta x^2$\\
+      \vspace{12pt}
+      $\Delta t \leq \frac{1}{4} \frac{\beta \epsilon}{\lambda} \Delta x^2$\\
+    \end{tabular}
+  \end{center}
+  \vspace{12pt}
+
+  \noindent
+  With a bound set for  $\Delta t$, we can now shift our focus to $\Delta x$ and $\Delta y$. Since
+  a digital image is composed of a finite number of individual pixels, we will compute the different
+  partial derivative approximations by simply taking our current pixel and applying an offset of
+  +1 or -1 to the current pixel's index, depending on the partial derivative we are trying to compute.
 
 
 
