@@ -8,33 +8,34 @@
 \begin{document}
   \maketitle
 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Problem Description
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \section{Problem Description}
   Although image processing techniques began to appear around the 1960s, the proliferation of inexpensive
   digital computing power has greatly widened the application pool. Image processing techniques
-  can now be found in areas such as digital photography, medical imaging, and object detection/tracking.
-  \\
+  can now be found in areas such as digital photography, medical imaging, and object detection/tracking.\\
 
   \noindent
   All these application areas can be affected by a very common problem: image noise.
   Noise can render further processing ineffective, thus there exist a variety of approaches by which
   we can attempt to smooth and denoise our images. Traditional image processing techniques
   may rely on fixed kernels that can be swept over an image in order to smooth it. However,
-  this type of approach will result in uniform smoothing can blur the edges of an image.
-  \\
+  this type of approach will result in uniform smoothing can blur the edges of an image.\\
 
   \noindent
   We can instead leverage PDEs to describe how an image should be updated depending on its local characteristics.
   More specifically, we will examine Ansiotropic Diffusion. This technique can be used to reduce image noise
   while lessening the blurring that is done to edges. This project will attempt to develop PDEs that
-  can be used to reduce noise in high/low contrast images.
-  \\
+  can be used to reduce noise in high/low contrast images.\\
 
   \noindent
-  We need more information about the actual high/low contrast problem!
-  \\
+  We need more information about the actual high/low contrast problem!\\
 
 
-
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Mathematical Modeling
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
   \section{Mathematical Modeling}
   Before explicitly developing our PDEs, we must first understand what behavior we want our system to have.
@@ -48,22 +49,10 @@
       $I(x,y)$
     \end{center}
   Note that the derivations in sections (2) and (3) are being performed
-  exclusively in continuous space: $x,y \in \mathbb{R}$.
-  \\
-  
-  \newpage
-  \noindent
-
-
-
-
-
-
-
-
+  exclusively in continuous space: $x,y \in \mathbb{R}$.\\
 
     
-    
+
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Derivation of PDE
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,14 +82,17 @@
     We will now have to compute terms $L_{I}$, $L_{I_{x}}$, $L_{I_{y}}$ using the previously obtained energy functional
       \begin{center}
         \begin{tabular}{l}
-          \vspace{12pt}
           $L(I,I_{x},I_{y},x,y) = \frac{\lambda}{1+e^{\alpha}}$, where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|)$\\
+          We will also include a term $\epsilon$ such that $\| \nabla_{I} \| = \sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}$\\
+          $\epsilon$ is a constant used to prevent stability issues and will be examined more\\
+          \vspace{12pt}
+          closely in section (4).\\
           $L_{I} = \frac{\partial}{\partial I}(L)$\\
           $L_{I} = 0$\\
           $L_{I_{x}} = \frac{\partial}{\partial I_{x}}(L)$\\
-          $L_{I_{x}} = \frac{\lambda}{\beta} \frac{e^\alpha}{(1+e^{\alpha})^2} \frac{I_{x}}{\sqrt{I_{x}^2 + I_{y}^2}}$\\
+          $L_{I_{x}} = \frac{\lambda}{\beta} \frac{e^\alpha}{(1+e^{\alpha})^2} \frac{I_{x}}{\sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}}$\\
           $L_{I_{y}} = \frac{\partial}{\partial I_{y}}(L)$\\
-          $L_{I_{y}} = \frac{\lambda}{\beta} \frac{e^\alpha}{(1+e^{\alpha})^2} \frac{I_{y}}{\sqrt{I_{x}^2 + I_{y}^2}}$\\
+          $L_{I_{y}} = \frac{\lambda}{\beta} \frac{e^\alpha}{(1+e^{\alpha})^2} \frac{I_{y}}{\sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}}$\\
         \end{tabular}
       \end{center}
       \vspace{12pt}
@@ -111,14 +103,16 @@
     the expression of $\frac{\partial}{\partial x}L_{I_{x}}$.\\
 
     \noindent
-    Let $\phi$ denote $\frac{e^\alpha}{(1+e^{\alpha})^2}$ and let $\gamma$ denote $\frac{I_{x}}{\sqrt{I_{x}^2 + I_{y}^2}}$.
+    Let $\phi$ denote $\frac{e^\alpha}{(1+e^{\alpha})^2}$ and let $\gamma$ denote $\frac{I_{x}}{\sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}}$.
     We can begin finding $\frac{\partial}{\partial x}L_{I_{x}}$ by using the product-rule $\frac{\partial}{\partial x}(\gamma)\phi + \frac{\partial}{\partial x}(\phi)\gamma$.
     We will start with the left side of the sum. Note that we must include $\frac{\lambda}{\beta}$ in the final expression.\\
     \begin{center}
       \begin{tabular}{l}
+        \vspace{12pt}
         $\frac{\partial}{\partial x}(\gamma)\phi$\\
-        $\frac{\partial}{\partial x}(\frac{I_{x}}{\sqrt{I_{x}^2 + I_{y}^2}})\phi$\\
-        $(\frac{I_{xx}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}} + \frac{I_{x}}{(I_{x}^2 + I_{y}^2)^\frac{3}{2}}(I_{x}I_{xx} + I_{y}I_{xy}))\phi$
+        \vspace{12pt}
+        $\frac{\partial}{\partial x}(\frac{I_{x}}{\sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}})\phi$\\
+        $(\frac{I_{xx}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}} + \frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}(I_{x}I_{xx} + I_{y}I_{xy}))\phi$
       \end{tabular}
     \end{center}
     \vspace{12pt}
@@ -139,7 +133,7 @@
     $(1+e^{\alpha})^{-2}$. Taking the partial derivative of $(e^\alpha)$
     \begin{center}
       \begin{tabular}{l}
-        $-\frac{1}{\beta} e^{\alpha} \frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}} (I_{x}I_{xx}+I_{y}I_{xy})$
+        $-\frac{1}{\beta} e^{\alpha} \frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}} (I_{x}I_{xx}+I_{y}I_{xy})$
       \end{tabular}
     \end{center}
 
@@ -147,7 +141,7 @@
     Taking the partial derivative of $(1+e^{\alpha})^{-2}$
     \begin{center}
       \begin{tabular}{l}
-        $-2(1+e^{\alpha})^{-3} (-\frac{1}{\beta} e^{\alpha} \frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}} (I_{x}I_{xx}+I_{y}I_{xy})) $
+        $-2(1+e^{\alpha})^{-3} (-\frac{1}{\beta} e^{\alpha} \frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}} (I_{x}I_{xx}+I_{y}I_{xy})) $
       \end{tabular}
     \end{center}
 
@@ -155,7 +149,7 @@
     Thus, after factoring common terms, $\frac{\partial}{\partial x}((e^\alpha)(1+e^{\alpha})^{-2})$ yields
     \begin{center}
       \begin{tabular}{l}
-        $[-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]$\\
+        $[-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]$\\
       \end{tabular}
     \end{center}
     \vspace{12pt}
@@ -168,9 +162,9 @@
       \vspace{12pt}
       $\frac{\partial}{\partial x}L_{I_{x}} =$\\
       \vspace{12pt}
-      $\frac{\lambda}{\beta}[ (\frac{I_{xx}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) - (\frac{I_{x}}{(I_{x}^2 + I_{y}^2)^\frac{3}{2}}) (I_{x}I_{xx} + I_{y}I_{xy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+      $\frac{\lambda}{\beta}[ (\frac{I_{xx}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xx} + I_{y}I_{xy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
       \vspace{12pt}
-      $(\frac{I_{x}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$
+      $(\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$
     \end{tabular}
   \end{center}
   \vspace{12pt}
@@ -182,9 +176,9 @@
         \vspace{12pt}
         $\frac{\partial}{\partial y}L_{I_{y}} =$\\
         \vspace{12pt}
-        $\frac{\lambda}{\beta}[ (\frac{I_{yy}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) - (\frac{I_{y}}{(I_{x}^2 + I_{y}^2)^\frac{3}{2}}) (I_{x}I_{xy} + I_{y}I_{yy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+        $\frac{\lambda}{\beta}[ (\frac{I_{yy}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xy} + I_{y}I_{yy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
         \vspace{12pt}
-        $(\frac{I_{y}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) (I_{x}I_{xy}+I_{y}I_{yy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$
+        $(\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xy}+I_{y}I_{yy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$
       \end{tabular}
     \end{center}
     \vspace{12pt}
@@ -195,19 +189,19 @@
     \begin{center}
       \begin{tabular}{l}
         \vspace{12pt}
-        $I_{t} = \frac{\lambda}{\beta}[ (\frac{I_{xx}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) - (\frac{I_{x}}{(I_{x}^2 + I_{y}^2)^\frac{3}{2}}) (I_{x}I_{xx} + I_{y}I_{xy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+        $I_{t} = \frac{\lambda}{\beta}[ (\frac{I_{xx}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xx} + I_{y}I_{xy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
         \vspace{12pt}
-        $(\frac{I_{x}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]+ $\\
+        $(\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]+ $\\
         \vspace{12pt}
-        $(\frac{I_{yy}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) - (\frac{I_{y}}{(I_{x}^2 + I_{y}^2)^\frac{3}{2}}) (I_{x}I_{xy} + I_{y}I_{yy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+        $(\frac{I_{yy}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xy} + I_{y}I_{yy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
         \vspace{12pt}
-        $(\frac{I_{y}}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2)^\frac{1}{2}}) (I_{x}I_{xy}+I_{y}I_{yy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$
+        $(\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xy}+I_{y}I_{yy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$
         \vspace{12pt}
       \end{tabular}
     \end{center}
 
     \noindent
-    Where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|)$\\
+    Where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|)$ and $\| \nabla_{I} \| = \sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}$\\
 
 
 
@@ -232,6 +226,7 @@
   numeric differentiation method shown in class
   \begin{center}
     \begin{tabular}{l}
+      \vspace{12pt}
       $f(x,t) = f(x,t)$\\
       $f(x,t+\Delta t) = f(x,t) + \Delta t f'(x,t) + O(\Delta t^2)$\\
     \end{tabular}
@@ -266,7 +261,7 @@
   $I_{x}$. A forward difference would introduce some bias because the value of $I_{x}$ at
   a certain point is dependent on an adjacent image value in the positive x-direction only.
   The central difference will balance out the value of $I_{x}$ since both directions
-  are considered. This will make the approximation more robust to variations in image content. \\
+  are considered. The intent is to make the approximation more robust to variations in image content. \\
 
   \newpage
   \noindent
@@ -274,8 +269,11 @@
   numeric differentiation method shown in class
   \begin{center}
     \begin{tabular}{l}
+      \vspace{12pt}
       $f(x,t) = f(x,t)$\\
+      \vspace{12pt}
       $f(x+\Delta x,t) = f(x,t) + \Delta x f'(x,t) + O(\Delta x^2)$\\
+      \vspace{12pt}
       $f(x-\Delta x,t) = f(x,t) - \Delta x f'(x,t) + O(\Delta x^2)$\\
     \end{tabular}
   \end{center}
@@ -285,6 +283,7 @@
   we obtain our approximation. Note that the approximation includes an error term $O(\Delta x)$.
   \begin{center}
     \begin{tabular}{l}
+      \vspace{12pt}
       $f'(x,t) = \frac{f(x+\Delta x,t) - f(x-\Delta x,t)}{2\Delta x}$\\
     \end{tabular}
   \end{center}
@@ -329,7 +328,19 @@
       $I_{xy}(x,y,t) = \frac{I(x+\Delta x,y+\Delta y,t) - I(x+\Delta x,y-\Delta y,t) - I(x-\Delta x,y+\Delta y,t) + I(x-\Delta x,y-\Delta y,t)}{4 \Delta x\Delta y} $ \\
     \end{tabular}
   \end{center}
-  \vspace{12pt}
+
+  \newpage
+  \noindent
+  Now that we have obtained all the necessary numeric approximations of the partial derivatives, we
+  can move towards defining a scheme that discretizes the PDE. This involves selecting
+  some important parameters.\\
+
+  \noindent
+  First, we will examine what is an appropriate time-step $\Delta t$. Previously,
+  we defined $I_{t}(x,y,t) = \frac{I(x,y,t+\Delta t) - I(x,y,t)}{\Delta t}$. In our implementation,
+  $\Delta t$ will multiply the right side of the PDE. The product will then be added to
+  the current image to obtain the updated image.\\
+
 
 
 
