@@ -19,18 +19,30 @@
   \noindent
   All these application areas can be affected by a very common problem: image noise.
   Noise can render further processing ineffective, thus there exist a variety of approaches by which
-  we can attempt to smooth and denoise our images. Traditional image processing techniques
+  we can attempt to smooth and denoise images. Traditional image processing techniques
   may rely on fixed kernels that can be swept over an image in order to smooth it. However,
-  this type of approach will result in uniform smoothing can blur the edges of an image.\\
+  this type of approach can result in uniform smoothing blurs the edges of an image.\\
 
   \noindent
   We can instead leverage PDEs to describe how an image should be updated depending on its local characteristics.
   More specifically, we will examine Ansiotropic Diffusion. This technique can be used to reduce image noise
-  while lessening the blurring that is done to edges. This project will attempt to develop PDEs that
-  can be used to reduce noise in high/low contrast images.\\
+  while lessening the blurring that is done to edges.\\
 
   \noindent
-  We need more information about the actual high/low contrast problem!\\
+  Linear diffusion (FIX PUT TV DIFFUSION AND PAPER LINK) filtering as described in \cite{Thomas_book} (update citation!!!) is a simple,
+  yet effective PDE method for image smoothing. The method has a linear energy functional. This means that at each
+  point in the image, the rate of diffusion is linear. Relatively smooth areas that contain some noise will have
+  the noise lessened, while strong edges will only slowly diffuse (as opposed to a quadratic penalty which would
+  yield a great amount of diffusion).\\
+
+  \noindent
+  Instead of continuing the diffusion at any gradient, this project will explore what happens if we
+  attempt to have a near zero amount of diffusion for the higher gradients (where we have edges).
+
+
+  \noindent
+  https://www.mia.uni-saarland.de/weickert/Papers/book.pdf\\
+
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -50,6 +62,8 @@
     \end{center}
   Note that the derivations in sections (2) and (3) are being performed
   exclusively in continuous space: $x,y \in \mathbb{R}$.\\
+
+  INTRODUCE THE ENERGY FUNCTIONAL!
 
     
 
@@ -214,6 +228,7 @@
   The PDE that was obtained in the previous section is only applicable for continuous
   time and space variables. We must discretize the PDE so that it can actually be implemented in software.\\
 
+  \subsection{Numerical Differentiation}
   \noindent
   Before explicitly discretizing the PDE, we must also obtain numeric approximations for its partial
   derivatives. Beginning with the left side of the PDE, let's approximate $I_{t}$. 
@@ -330,6 +345,7 @@
   \end{center}
 
   \newpage
+  \subsection{Parameter Selection}
   \noindent
   Now that we have obtained all the necessary numeric approximations of the partial derivatives, we
   can move towards defining a scheme that discretizes the PDE. This involves selecting
@@ -358,39 +374,120 @@
     \begin{tabular}{l}
       \vspace{12pt}
       $\frac{\lambda}{\beta \epsilon} \leq \frac{1}{4} \Delta x^2$\\
-      \vspace{12pt}
       $\Delta t \leq \frac{1}{4} \frac{\beta \epsilon}{\lambda} \Delta x^2$\\
     \end{tabular}
   \end{center}
-  \vspace{12pt}
 
   \noindent
   With a bound set for  $\Delta t$, we can now shift our focus to $\Delta x$ and $\Delta y$. Since
   a digital image is composed of a finite number of individual pixels, we will compute the different
   partial derivative approximations by simply taking our current pixel and applying an offset of
-  +1 or -1 to the current pixel's index, depending on the partial derivative we are trying to compute.
+  +1 or -1 to the current pixel's $x$ and $y$ indices. For example, for $I_{x}$
+  \begin{center}
+    \begin{tabular}{l}
+      $I_{x}(x,y,t) = \frac{I(x+\Delta x,y,t)}{2\Delta x} - \frac{I(x-\Delta x,y,t)}{2\Delta x}$, we can
+      \vspace{12pt}
+      compute $I_{x}$ at pixel $(a,b)$ as\\
+      $I_{x}(a,b,t) = \frac{I(a+1,b,t)}{2(1)} - \frac{I(a-1,b,t)}{2(1)}$
+    \end{tabular}
+  \end{center}
+
+  \noindent
+  Finally, we will iterate through each pixel in the image and compute how the pixel should
+  be updated based on the PDE.
+
+  \newpage
+  \subsection{Implementation Summary}
+  \noindent
+  \vspace{12pt}
+  \textbf{PDE}\\
+  \begin{tabular}{l}
+    \vspace{12pt}
+    $I_{t} = \frac{\lambda}{\beta}[ (\frac{I_{xx}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xx} + I_{y}I_{xy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+    \vspace{12pt}
+    $(\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]+ $\\
+    \vspace{12pt}
+    $(\frac{I_{yy}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xy} + I_{y}I_{yy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+    \vspace{12pt}
+    $(\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xy}+I_{y}I_{yy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$\\
+    \vspace{12pt}
+    Where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|)$ and $\| \nabla_{I} \| = \sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}$\\
+  \end{tabular}
+  \vspace{12pt}
+
+  \noindent
+  \vspace{12pt}
+  \textbf{Partial Derivatives}\\
+  \begin{tabular}{l}
+    \vspace{12pt}
+    $I_{t}(x,y,t) = \frac{I(x,y,t+\Delta t) - I(x,y,t)}{\Delta t}$\\
+    \vspace{12pt}
+    $I_{x}(x,y,t) = \frac{I(x+\Delta x,y,t)}{2\Delta x} - \frac{I(x-\Delta x,y,t)}{2\Delta x}$\\
+    \vspace{12pt}
+    $I_{y}(x,y,t) = \frac{I(x,y+\Delta y,t) - I(x,y-\Delta y,t)}{2\Delta y}$\\
+    \vspace{12pt}
+    $I_{xx}(x,y,t) = \frac{I(x+\Delta x,y,t) - 2I(x,y,t) + I(x-\Delta x,y,t)}{\Delta x^{2}}$\\
+    \vspace{12pt}
+    $I_{yy}(x,y,t) = \frac{I(x,y+\Delta y,t) - 2I(x,y,t) + I(x,y-\Delta y,t)}{\Delta y^{2}}$\\
+    \vspace{12pt}
+    $I_{xy}(x,y,t) = \frac{I(x+\Delta x,y+\Delta y,t) - I(x+\Delta x,y-\Delta y,t) - I(x-\Delta x,y+\Delta y,t) + I(x-\Delta x,y-\Delta y,t)}{4 \Delta x\Delta y} $ \\
+  \end{tabular}
+  \vspace{12pt}
+
+  \newpage
+  \noindent
+  \vspace{12pt}
+  \textbf{CFL Condition}\\
+  \begin{tabular}{l}
+    \vspace{12pt}
+    $\Delta t \leq \frac{1}{4} \frac{\beta \epsilon}{\lambda} \Delta x^2$\\
+  \end{tabular}
+  \vspace{12pt}
+
+  \noindent
+  \vspace{12pt}
+  \textbf{Parameters}\\
+  \begin{tabular}{l}
+    \vspace{12pt}
+    $\Delta t, \Delta x, \Delta y, \beta, \epsilon, \lambda $\\
+  \end{tabular}
+  \vspace{12pt}
+
+  \noindent
+  \vspace{12pt}
+  \textbf{Format of Implemented PDE}\\
+  \begin{tabular}{l}
+    \vspace{12pt}
+    $I(x,y,t+\Delta t) = I(x,y,t) + \Delta t (I_{t})$\\
+  \end{tabular}
+  \vspace{12pt}
+
+
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Experimental Procedure
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \newpage
+  \section{Experimental Procedure}
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Experimental Results
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
   \section{Experimental Results}
 
 
   \section{Summary}
+
+
+  \begin{thebibliography}{unsrt}
+    \bibitem{Thomas_book}
+      Thomas, L. \& Ari, R. d. \emph{Biological Feedback} (CRC Press, USA, 1990).
+  \end{thebibliography}
 
 \end{document}
