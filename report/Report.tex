@@ -17,11 +17,11 @@
   can now be found in areas such as digital photography, medical imaging, and object detection/tracking.\\
 
   \noindent
-  All these application areas can be affected by a very common problem: image noise.
+  All these applicationss can be affected by a very common problem: image noise.
   Noise can render further processing ineffective, thus there exist a variety of approaches by which
   we can attempt to smooth and denoise images. Traditional image processing techniques
   may rely on fixed kernels that can be swept over an image in order to smooth it. However,
-  this type of approach can result in uniform smoothing blurs the edges of an image.\\
+  this type of approach can result in uniform smoothing that blurs the edges of an image.\\
 
   \noindent
   We can instead leverage PDEs to describe how an image should be updated depending on its local characteristics.
@@ -50,20 +50,40 @@
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
   \section{Mathematical Modeling}
-  Before explicitly developing our PDEs, we must first understand what behavior we want our system to have.
-  The calculus of variations can be used to minimize an energy functional. The choice of setup for the
-  energy functional will determine the system behavior.
-  \\
+  Before explicitly developing our PDE, we must first understand the behavior that we want our system to have.
+  The Calculus of Variations is an extremely powerful tool that will help us arrive at a PDE that reflects
+  the desired behavior. Examine the following equation
+  \begin{center}
+    \begin{tabular}{l}
+      $E(I) = \int_{0}^{1} \int_{0}^{1} L(I, I_{x}, I_{y}, x, y) dx dy$
+    \end{tabular}
+  \end{center}
 
   \noindent
-  Let's begin by defining our image as
-    \begin{center}
-      $I(x,y)$
-    \end{center}
-  Note that the derivations in sections (2) and (3) are being performed
-  exclusively in continuous space: $x,y \in \mathbb{R}$.\\
+  $E(I)$ is the energy functional. Similar to the common understanding of a function, it can output
+  a single value. The key difference is that the input to the energy functional, is another entire
+  function that will depend on traditional variables like $x,y$, etc.\\
 
-  INTRODUCE THE ENERGY FUNCTIONAL!
+  \noindent
+  Note that all notation before section (4) is for continuous space: $x,y \in \mathbb{R}$. Thus,
+  the input to the energy functional can be thought of as an image with an infinite amount of pixels: $I(x,y)$.\\
+
+  \noindent
+  During class the following example was introduced. If we wanted to measure how noisy a certain image is,
+  we could measure the magnitude of the image's gradient.
+  \begin{center}
+    \begin{tabular}{l}
+      $E(I) = \int_{0}^{1} \int_{0}^{1} \frac{1}{2} (\| \nabla_{I} \|)^{2} dx$
+    \end{tabular}
+  \end{center}
+  A noisier image will have a larger value for $E(I)$ while a smoother image will have a smaller value for $E(I)$.
+  By beginning with an energy functional and applying the mechanics of the Calculus of Variations, we arrive at
+  at the 2-dimensional linear heat equation $I_{t} = \Delta I$. Although this process will be shown for an energy
+  functional of our choice in section (3), it is important to understand the implications of the chosen energy functional.
+  
+
+
+
 
     
 
