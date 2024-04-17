@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{graphicx}
 \title{\textbf{ECE 6560 Final Project - Image Smoothing}}
 \author{Alexander Domagala}
 \date{Spring 2024}
@@ -50,6 +51,7 @@
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
   \section{Mathematical Modeling}
+  \subsection{Introduction}
   Before explicitly developing our PDE, we must first understand the behavior that we want our system to have.
   The Calculus of Variations is an extremely powerful tool that will help us arrive at a PDE that reflects
   the desired behavior. Examine the following equation
@@ -69,20 +71,68 @@
   the input to the energy functional can be thought of as an image with an infinite amount of pixels: $I(x,y)$.\\
 
   \noindent
-  During class the following example was introduced. If we wanted to measure how noisy a certain image is,
-  we could measure the magnitude of the image's gradient.
+  During class, the following example was introduced. If we want to measure how noisy a certain image is,
+  we could measure the average value of the image's gradient squared.
   \begin{center}
     \begin{tabular}{l}
       $E(I) = \int_{0}^{1} \int_{0}^{1} \frac{1}{2} (\| \nabla_{I} \|)^{2} dx$
     \end{tabular}
   \end{center}
-  A noisier image will have a larger value for $E(I)$ while a smoother image will have a smaller value for $E(I)$.
-  By beginning with an energy functional and applying the mechanics of the Calculus of Variations, we arrive at
-  at the 2-dimensional linear heat equation $I_{t} = \Delta I$. Although this process will be shown for an energy
-  functional of our choice in section (3), it is important to understand the implications of the chosen energy functional.
-  
+
+  \noindent
+  Noiser images will have larger values for $E(I)$ while smoother images will have a smaller values for $E(I)$.
+  Let's examine how the design of an energy functional impacts image smoothing.\\
+
+  \noindent
+  In traditional calculus, if given some function, we can obtain its derivative and find a value that minimizes the function.
+  In the Calculus of Variations, if given some energy functional, we can obtain a PDE (via gradient descent) that 
+  sets constraints so that a function can minimize the energy functional.\\
+
+  \newpage
+  \noindent
+  In the case of the example, minimization yields the Linear Heat Equation
+  \begin{center}
+    $I_{t} = \Delta I$
+  \end{center}
+  The Linear Heat Equation optimally reduces the average squared value of the gradient in an image.
+  This means that areas of high gradient in the image will be aggresively smoothed. Furthermore, as the
+  magnitude of the gradient increases, the smoothing effect grows quadratically. Hence, the edges (which
+  are areas of higher gradient) are not very well preserved with this technique.
+  \begin{center}
+    Quadratic Penalty: $x^2$\\
+    \vspace{12pt}
+    \includegraphics[scale=0.5]{../report_images/squared.png}
+  \end{center}
+  \vspace{12pt}
+
+  \noindent
+  A major improvement is to instead use a linear penalty. Smoothing that takes place at the edges
+  will be less extreme than the previous case. This means that enough diffusion could take place
+  in areas of low gradient such that the image appears to be denoised. Then, the diffusion can be stopped.
+  Although the edges also experience diffusion, the penalty is much more lenient than the previous case.
+  This method is known as Total Variation Diffusion.
+  \begin{center}
+    Linear Penalty: $x$\\
+    \vspace{12pt}
+    \includegraphics[scale=0.5]{../report_images/linear.png}
+  \end{center}
 
 
+  \newpage
+  \noindent
+  TODO:\\
+    INTRODUCE Ansiotropic Diffusion\\
+    Describe the NEW energy functional\\
+  $\| \nabla_{I} \|$
+
+  \begin{center}
+    Sigmoidal Penalty: $ADD$\\
+    \vspace{12pt}
+    \includegraphics[scale=0.5]{../report_images/sigmoid.png}
+  \end{center}
+  \vspace{12pt}
+
+  \noindent
 
 
     
