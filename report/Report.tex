@@ -84,6 +84,7 @@
   Let's examine how the design of an energy functional impacts image smoothing.\\
 
   \noindent
+  PROBABLY REMOVE\\
   In traditional calculus, if given some function, we can obtain its derivative and find a value that minimizes the function.
   In the Calculus of Variations, if given some energy functional, we can obtain a PDE (via gradient descent) that 
   sets constraints so that a function can minimize the energy functional.\\
@@ -95,8 +96,7 @@
     $I_{t} = \Delta I$
   \end{center}
   The Linear Heat Equation optimally reduces the average squared value of the gradient in an image.
-  This means that areas of high gradient in the image will be aggresively smoothed. Furthermore, as the
-  magnitude of the gradient increases, the smoothing effect grows quadratically. Hence, the edges (which
+  This means that areas of high gradient in the image will be aggresively smoothed. Hence, the edges (which
   are areas of higher gradient) are not very well preserved with this technique.
   \begin{center}
     Quadratic Penalty: $x^2$\\
@@ -117,22 +117,38 @@
     \includegraphics[scale=0.5]{../report_images/linear.png}
   \end{center}
 
-
   \newpage
   \noindent
-  TODO:\\
-    INTRODUCE Ansiotropic Diffusion\\
-    Describe the NEW energy functional\\
-  $\| \nabla_{I} \|$
+  \subsection{Anisotropic Diffusion}
+  With an understading of energy functionals and how their design will affect
+  image smoothing, we can now propose an energy functional that can be adapted
+  to suit images in which edge preservation is very important.\\
 
+  \noindent
+  This generalized approach that uses a penalty that is a function of
+  the magnitude of the gradient is known as Anisotropic or Perona-Malik Diffusion.
   \begin{center}
-    Sigmoidal Penalty: $ADD$\\
+    $E(I) = \iint C(\| \nabla_{I} \|) dx dy$
+  \end{center}
+
+  \noindent
+  The goal of this penalty is to have more smoothing at lower gradients and
+  transition to very strong edge preservation for high gradients. A nearly
+  flat penalty means that almost no diffusion will be occurring for 
+  higher gradients. Thus, our filter will only be suited for removing noise
+  that doesn't strongly contrast with the image.
+  \begin{center}
+    Sigmoidal Penalty: $\frac{\lambda}{1+e^{-x}}$\\
     \vspace{12pt}
     \includegraphics[scale=0.5]{../report_images/sigmoid.png}
   \end{center}
   \vspace{12pt}
 
+
+
+
   \noindent
+  $\| \nabla_{I} \|$
 
 
     

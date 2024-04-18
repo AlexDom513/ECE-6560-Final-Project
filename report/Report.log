@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.3) (preloaded format=pdflatex 2024.3.25)  17 APR 2024 00:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.3) (preloaded format=pdflatex 2024.3.25)  17 APR 2024 20:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -205,7 +205,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 82--85
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--90
+Underfull \hbox (badness 10000) in paragraph at lines 86--91
 
  []
 
@@ -221,73 +221,77 @@ File: ../report_images/linear.png Graphic file (type png)
 Package pdftex.def Info: ../report_images/linear.png  used on input line 117.
 (pdftex.def)             Requested size: 126.09578pt x 146.42166pt.
  [3 <../report_images/squared.png> <../report_images/linear.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 123--126
+
+ []
+
 <../report_images/sigmoid.png, id=25, 260.47313pt x 252.19218pt>
 File: ../report_images/sigmoid.png Graphic file (type png)
 <use ../report_images/sigmoid.png>
-Package pdftex.def Info: ../report_images/sigmoid.png  used on input line 131.
+Package pdftex.def Info: ../report_images/sigmoid.png  used on input line 143.
 (pdftex.def)             Requested size: 130.23624pt x 126.09578pt.
- [4 <../report_images/sigmoid.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 184--188
+[4 <../report_images/sigmoid.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 200--204
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 189--193
+Underfull \hbox (badness 10000) in paragraph at lines 205--209
 
  []
 
 [5]
-Overfull \hbox (39.99791pt too wide) in paragraph at lines 245--253
+Overfull \hbox (39.99791pt too wide) in paragraph at lines 261--269
  [] 
  []
 
 
-Overfull \hbox (39.54195pt too wide) in paragraph at lines 259--267
+Overfull \hbox (39.54195pt too wide) in paragraph at lines 275--283
  [] 
  []
 
 [6]
-Overfull \hbox (44.99792pt too wide) in paragraph at lines 274--285
+Overfull \hbox (44.99792pt too wide) in paragraph at lines 290--301
  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 287--289
+Underfull \hbox (badness 10000) in paragraph at lines 303--305
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 297--300
+Underfull \hbox (badness 10000) in paragraph at lines 313--316
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 302--308
+Underfull \hbox (badness 10000) in paragraph at lines 318--324
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 338--343
+Underfull \hbox (badness 10000) in paragraph at lines 354--359
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 344--350
+Underfull \hbox (badness 10000) in paragraph at lines 360--366
 
  []
 
 [8]
-Overfull \hbox (66.9515pt too wide) in paragraph at lines 405--415
+Overfull \hbox (66.9515pt too wide) in paragraph at lines 421--431
  [] 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 419--423
+Underfull \hbox (badness 10000) in paragraph at lines 435--439
 
  []
 
 [10]
-Overfull \hbox (44.99792pt too wide) in paragraph at lines 471--487
+Overfull \hbox (44.99792pt too wide) in paragraph at lines 487--503
 []
  []
 
@@ -306,7 +310,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  57i,10n,65p,376b,220s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Report.pdf (14 pages, 217344 bytes).
+Output written on Report.pdf (14 pages, 218915 bytes).
 PDF statistics:
  130 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
