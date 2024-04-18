@@ -18,31 +18,22 @@
   can now be found in areas such as digital photography, medical imaging, and object detection/tracking.\\
 
   \noindent
-  All these applicationss can be affected by a very common problem: image noise.
+  All these applications can be affected by a very common problem: image noise.
   Noise can render further processing ineffective, thus there exist a variety of approaches by which
-  we can attempt to smooth and denoise images. Traditional image processing techniques
-  may rely on fixed kernels that can be swept over an image in order to smooth it. However,
-  this type of approach can result in uniform smoothing that blurs the edges of an image.\\
+  we can attempt to smooth and denoise images. More traditional image processing techniques
+  may involve fixed convolutional kernels, eg. box blur \cite{Convolution}, that indicate how a specific pixel
+  can be updated as a weighted sum of its neighbors. Approaches of this nature will reduce the noise in
+  exchange for the image appearing blurred.\\
 
   \noindent
   We can instead leverage PDEs to describe how an image should be updated depending on its local characteristics.
-  More specifically, we will examine Ansiotropic Diffusion. This technique can be used to reduce image noise
-  while lessening the blurring that is done to edges.\\
+  Approaches that leverage PDEs offer noise reduction while also lessening the blurring that is done to edges.\\
 
   \noindent
-  Linear diffusion (FIX PUT TV DIFFUSION AND PAPER LINK) filtering as described in \cite{Thomas_book} (update citation!!!) is a simple,
-  yet effective PDE method for image smoothing. The method has a linear energy functional. This means that at each
-  point in the image, the rate of diffusion is linear. Relatively smooth areas that contain some noise will have
-  the noise lessened, while strong edges will only slowly diffuse (as opposed to a quadratic penalty which would
-  yield a great amount of diffusion).\\
-
-  \noindent
-  Instead of continuing the diffusion at any gradient, this project will explore what happens if we
-  attempt to have a near zero amount of diffusion for the higher gradients (where we have edges).
-
-
-  \noindent
-  https://www.mia.uni-saarland.de/weickert/Papers/book.pdf\\
+  In this project, we will explore how we can tailor a PDE-based filter to suit a specific image.
+  The goal is that by understanding the characteristics of the image's edges and noise, we
+  will be able to outperform a more generalized PDE-based filter. The filter will be developed
+  using techniques related to Anisotropic Diffusion.
 
 
 
@@ -53,8 +44,8 @@
   \section{Mathematical Modeling}
   \subsection{Introduction}
   Before explicitly developing our PDE, we must first understand the behavior that we want our system to have.
-  The Calculus of Variations is an extremely powerful tool that will help us arrive at a PDE that reflects
-  the desired behavior. Examine the following equation
+  We will leverage the Calculus of Variations which is an extremely powerful tool that will help arrive at a PDE
+  that reflects some desired behavior. Examine the following equation
   \begin{center}
     \begin{tabular}{l}
       $E(I) = \int_{0}^{1} \int_{0}^{1} L(I, I_{x}, I_{y}, x, y) dx dy$
@@ -550,13 +541,18 @@
 
 
 
-
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Experimental Procedure
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
   \section{Experimental Procedure}
-
+  \begin{enumerate}
+    \item Select image and load into program.
+    \item Run gradient histogram to understand characteristics of image.
+    \item Update smoothing parameters.
+    \item Run smoothing algorithm on image, measure and record MSE during each iteration.
+    \item After MSE reaches minimum and begins to increase, run 20 iterations past this point.
+  \end{enumerate}
 
 
 
@@ -573,6 +569,9 @@
 
   \begin{thebibliography}{unsrt}
     \bibitem{Thomas_book}
+      Thomas, L. \& Ari, R. d. \emph{Biological Feedback} (CRC Press, USA, 1990).
+    \bibitem{Convolution}
+      %https://web.archive.org/web/20060718054020/http://www.acm.uiuc.edu/siggraph/workshops/wjarosz_convolution_2001.pdf
       Thomas, L. \& Ari, R. d. \emph{Biological Feedback} (CRC Press, USA, 1990).
   \end{thebibliography}
 
