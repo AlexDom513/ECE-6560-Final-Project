@@ -44,7 +44,7 @@
   \section{Mathematical Modeling}
   \subsection{Introduction}
   Before explicitly developing our PDE, we must first understand the behavior that we want our system to have.
-  We will leverage the Calculus of Variations which is an extremely powerful tool that will help arrive at a PDE
+  We will leverage the Calculus of Variations. This is a powerful framework that will help arrive at a PDE
   that reflects some desired behavior. Examine the following equation
   \begin{center}
     \begin{tabular}{l}
@@ -62,7 +62,7 @@
   the input to the energy functional can be thought of as an image with an infinite amount of pixels: $I(x,y)$.\\
 
   \noindent
-  During class, the following example was introduced. If we want to measure how noisy a certain image is,
+  During lecture, the following example was introduced. If we want to measure how noisy a certain image is,
   we could measure the average value of the image's gradient squared.
   \begin{center}
     \begin{tabular}{l}
@@ -71,22 +71,21 @@
   \end{center}
 
   \noindent
-  Noiser images will have larger values for $E(I)$ while smoother images will have a smaller values for $E(I)$.
-  Let's examine how the design of an energy functional impacts image smoothing.\\
-
-  \noindent
-  PROBABLY REMOVE\\
-  In traditional calculus, if given some function, we can obtain its derivative and find a value that minimizes the function.
-  In the Calculus of Variations, if given some energy functional, we can obtain a PDE (via gradient descent) that 
-  sets constraints so that a function can minimize the energy functional.\\
+  Given two copies of the same image with different amounts of noise, the noiser image will have larger values
+  for $E(I)$ while smoother image will have a smaller values for $E(I)$. The Calculus of Variations says
+  that we can utilize the Euler Lagrange equation
+  $L_{I} - \frac{\partial}{\partial x}L_{I_{x}} - \frac{\partial}{\partial y}L_{I_{y}} = 0$ to solve an
+  optimization problem that minimizes the energy functional $E(I)$. Since we defined the
+  energy functional to measure the average gradient squared, minimization will yield a method
+  by which we can most efficiently reduce this criterion.\\
 
   \newpage
   \noindent
-  In the case of the example, minimization yields the Linear Heat Equation
+  In the case of the example, minimization yields the Linear Heat equation
   \begin{center}
     $I_{t} = \Delta I$
   \end{center}
-  The Linear Heat Equation optimally reduces the average squared value of the gradient in an image.
+  The Linear Heat equation optimally reduces the average squared value of the gradient in an image.
   This means that areas of high gradient in the image will be aggresively smoothed. Hence, the edges (which
   are areas of higher gradient) are not very well preserved with this technique.
   \begin{center}
@@ -111,17 +110,36 @@
   \newpage
   \noindent
   \subsection{Anisotropic Diffusion}
-  With an understading of energy functionals and how their design will affect
-  image smoothing, we can now propose an energy functional that can be adapted
-  to suit images in which edge preservation is very important.\\
-
-  \noindent
-  This generalized approach that uses a penalty that is a function of
-  the magnitude of the gradient is known as Anisotropic or Perona-Malik Diffusion.
+  The previous examples showed that by selecting a certain penalty and then minimizing the
+  associated energy functional, we can control the smoothing behavior of a particular system.
+  The examples can be generalized to what is known as Anisotropic or Perona-Malik Diffusion.
+  We can continue towards the project goal of tailoring a penalty to a specific image
+  by working under this framework.
   \begin{center}
     $E(I) = \iint C(\| \nabla_{I} \|) dx dy$
   \end{center}
+  We will work to develop a custom penalty $C(\| \nabla_{I}\|)$ that supports
+  enhanced edge preservation for specific images.
 
+  \subsection{Image Profiling}
+  Consider the following image\\
+  \begin{center}
+    \includegraphics[scale=0.5]{../report_images/boat_crop.png}
+  \end{center}
+  \vspace{12pt}
+
+
+
+
+
+
+
+
+
+
+
+
+  \newpage
   \noindent
   The goal of this penalty is to have more smoothing at lower gradients and
   transition to very strong edge preservation for high gradients. A nearly
@@ -134,12 +152,19 @@
     \includegraphics[scale=0.5]{../report_images/sigmoid.png}
   \end{center}
   \vspace{12pt}
-
-
-
-
   \noindent
   $\| \nabla_{I} \|$
+
+
+
+
+
+
+
+
+
+
+
 
 
     
@@ -315,7 +340,7 @@
 
   \noindent
   The forward difference for a single (space) variable can be obtained using the 
-  numeric differentiation method shown in class
+  numeric differentiation method shown in lecture
   \begin{center}
     \begin{tabular}{l}
       \vspace{12pt}
@@ -358,7 +383,7 @@
   \newpage
   \noindent
   The central difference for a single (space) variable can be obtained using the
-  numeric differentiation method shown in class
+  numeric differentiation method shown in lecture
   \begin{center}
     \begin{tabular}{l}
       \vspace{12pt}
@@ -446,7 +471,7 @@
 
   \noindent
   We can include our constants with the form of the CFL condition for the two-dimensional linear heat equation
-  as shown in class
+  as shown in lecture
   \begin{center}
     \begin{tabular}{l}
       \vspace{12pt}
