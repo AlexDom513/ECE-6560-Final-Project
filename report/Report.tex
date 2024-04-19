@@ -2,6 +2,7 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \title{\textbf{ECE 6560 Final Project - Image Smoothing}}
 \author{Alexander Domagala}
 \date{Spring 2024}
@@ -32,8 +33,8 @@
   \noindent
   In this project, we will explore how we can tailor a PDE-based filter to suit a specific image.
   The goal is that by understanding the characteristics of the image's edges and noise, we
-  will be able to outperform a more generalized PDE-based filter. The filter will be developed
-  using techniques related to Anisotropic Diffusion.
+  will be able to outperform a more generalized PDE-based filter. Our filter will be developed
+  using techniques falling under Anisotropic Diffusion.
 
 
 
@@ -121,37 +122,68 @@
   We will work to develop a custom penalty $C(\| \nabla_{I}\|)$ that supports
   enhanced edge preservation for specific images.
 
+  SHOW THE GENERAL Anisotropic DIFFUSION FORMULAS HERE!!!!
+
   \subsection{Image Profiling}
-  Consider the following image\\
+  NEED TO REPLACE WITH REGULAR NOISE!!
+
+
+  Consider the following images
+  \begin{figure}[!htb]
+    \begin{center}
+      \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{../report_images/boat_crop.png}
+        \caption{Original Image}
+      \end{subfigure}
+      \hfill
+      \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{../report_images/noisy.png}
+        \caption{Corrputed Image}
+      \end{subfigure}
+    \end{center}
+  \end{figure}
+
+
+  \noindent
+  We can compute the magnitude gradient at each pixel in the image using the following
+  approximations that are derived in section (4):
   \begin{center}
-    \includegraphics[scale=0.5]{../report_images/boat_crop.png}
+    \begin{tabular}{l}
+      \vspace{12pt}
+      $I_{x}(x,y,t) = \frac{I(x+\Delta x,y,t) - I(x-\Delta x,y,t)}{2\Delta x}$\\
+      \vspace{12pt}
+      $I_{y}(x,y,t) = \frac{I(x,y+\Delta y,t) - I(x,y-\Delta y,t)}{2\Delta y}$\\
+      \vspace{12pt}
+      $\| \nabla_{I} \| = \sqrt{I_{x}^2 + I_{y}^2}$\\
+    \end{tabular}
   \end{center}
-  \vspace{12pt}
-
-
-
-
-
-
-
-
-
-
-
 
   \newpage
   \noindent
-  The goal of this penalty is to have more smoothing at lower gradients and
-  transition to very strong edge preservation for high gradients. A nearly
-  flat penalty means that almost no diffusion will be occurring for 
-  higher gradients. Thus, our filter will only be suited for removing noise
-  that doesn't strongly contrast with the image.
+  The distribution of the magnitude gradient can be visualized using a histogram.
+  \begin{center}
+    \includegraphics[scale=0.5]{../report_images/gradient.png}
+  \end{center}
+  \vspace{12pt}
+
+  \noindent
+  The corrputed image appears to differ in the range of 80 to 110.
+  Let's shape the energy functional so that pixels in the image that
+  fall in this range of gradients are smoothed. Thus, we
+  can propose the following penalty
   \begin{center}
     Sigmoidal Penalty: $\frac{\lambda}{1+e^{-x}}$\\
     \vspace{12pt}
     \includegraphics[scale=0.5]{../report_images/sigmoid.png}
   \end{center}
   \vspace{12pt}
+
+  \noindent
+  The goal of this penalty is only have smoothing at the gradients
+  that are corrputing the image. By keeping a flat penalty in the
+  other regions, we will greatly reduce the amount of diffusion that
+  takes place along the edges.
+
   \noindent
   $\| \nabla_{I} \|$
 
