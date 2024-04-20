@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.3) (preloaded format=pdflatex 2024.3.25)  18 APR 2024 23:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.3) (preloaded format=pdflatex 2024.3.25)  20 APR 2024 12:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -231,93 +231,98 @@ File: ../report_images/linear.png Graphic file (type png)
 Package pdftex.def Info: ../report_images/linear.png  used on input line 108.
 (pdftex.def)             Requested size: 126.09578pt x 146.42166pt.
  [3 <../report_images/squared.png> <../report_images/linear.png>]
-<../report_images/boat_crop.png, id=26, 323.70938pt x 316.93407pt>
+Underfull \hbox (badness 10000) in paragraph at lines 122--125
+
+ []
+
+[4]
+<../report_images/boat_crop.png, id=30, 323.70938pt x 316.93407pt>
 File: ../report_images/boat_crop.png Graphic file (type png)
 <use ../report_images/boat_crop.png>
-Package pdftex.def Info: ../report_images/boat_crop.png  used on input line 135.
+Package pdftex.def Info: ../report_images/boat_crop.png  used on input line 159.
 (pdftex.def)             Requested size: 137.9979pt x 135.10867pt.
-<../report_images/noisy.png, id=27, 327.47343pt x 324.46219pt>
+<../report_images/noisy.png, id=31, 327.47343pt x 324.46219pt>
 File: ../report_images/noisy.png Graphic file (type png)
 <use ../report_images/noisy.png>
-Package pdftex.def Info: ../report_images/noisy.png  used on input line 140.
+Package pdftex.def Info: ../report_images/noisy.png  used on input line 164.
 (pdftex.def)             Requested size: 137.9979pt x 136.72865pt.
- [4 <../report_images/boat_crop.png> <../report_images/noisy.png>]
-<../report_images/gradient.png, id=35, 510.40688pt x 405.01312pt>
+ [5 <../report_images/boat_crop.png> <../report_images/noisy.png>]
+<../report_images/gradient.png, id=38, 510.40688pt x 405.01312pt>
 File: ../report_images/gradient.png Graphic file (type png)
 <use ../report_images/gradient.png>
-Package pdftex.def Info: ../report_images/gradient.png  used on input line 165.
+Package pdftex.def Info: ../report_images/gradient.png  used on input line 188.
 (pdftex.def)             Requested size: 255.2028pt x 202.50606pt.
-<../report_images/sigmoid.png, id=36, 529.98pt x 337.26pt>
+<../report_images/sigmoid.png, id=39, 529.98pt x 337.26pt>
 File: ../report_images/sigmoid.png Graphic file (type png)
 <use ../report_images/sigmoid.png>
-Package pdftex.def Info: ../report_images/sigmoid.png  used on input line 177.
+Package pdftex.def Info: ../report_images/sigmoid.png  used on input line 200.
 (pdftex.def)             Requested size: 264.98933pt x 168.62958pt.
- [5 <../report_images/gradient.png> <../report_images/sigmoid.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 248--252
+ [6 <../report_images/gradient.png> <../report_images/sigmoid.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 271--275
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 253--257
+Underfull \hbox (badness 10000) in paragraph at lines 276--280
 
- []
-
-[6]
-Overfull \hbox (39.99791pt too wide) in paragraph at lines 309--317
- [] 
- []
-
-
-Overfull \hbox (39.54195pt too wide) in paragraph at lines 323--331
- [] 
  []
 
 [7]
-Overfull \hbox (44.99792pt too wide) in paragraph at lines 338--349
+Overfull \hbox (39.99791pt too wide) in paragraph at lines 332--340
  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--353
-
+Overfull \hbox (39.54195pt too wide) in paragraph at lines 346--354
+ [] 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 361--364
-
+Overfull \hbox (44.99792pt too wide) in paragraph at lines 361--372
+ [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 366--372
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 402--407
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 408--414
+Underfull \hbox (badness 10000) in paragraph at lines 374--376
 
  []
 
 [9]
-Overfull \hbox (66.9515pt too wide) in paragraph at lines 469--479
- [] 
+Underfull \hbox (badness 10000) in paragraph at lines 384--387
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 389--395
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 425--430
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 431--437
+
  []
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 483--487
-
+Overfull \hbox (66.9515pt too wide) in paragraph at lines 492--502
+ [] 
  []
 
 [11]
-Overfull \hbox (44.99792pt too wide) in paragraph at lines 535--551
+Underfull \hbox (badness 10000) in paragraph at lines 506--510
+
+ []
+
+[12]
+Overfull \hbox (44.99792pt too wide) in paragraph at lines 558--574
 []
  []
 
-[12] [13] [14] [15] (Report.aux)
+[13] [14] [15] [16] (Report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-03-14>
@@ -330,11 +335,11 @@ Here is how much of TeX's memory you used:
  26388 multiletter control sequences out of 15000+600000
  566884 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 67i,10n,77p,449b,533s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 67i,10n,77p,449b,535s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Report.pdf (15 pages, 416450 bytes).
+Output written on Report.pdf (16 pages, 419547 bytes).
 PDF statistics:
- 144 PDF objects out of 1000 (max. 8388607)
+ 147 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

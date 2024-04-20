@@ -21,7 +21,7 @@
   \noindent
   All these applications can be affected by a very common problem: image noise.
   Noise can render further processing ineffective, thus there exist a variety of approaches by which
-  we can attempt to smooth and denoise images. More traditional image processing techniques
+  we can attempt to smooth and denoise images. More traditional denoising techniques
   may involve fixed convolutional kernels, eg. box blur \cite{Convolution}, that indicate how a specific pixel
   can be updated as a weighted sum of its neighbors. Approaches of this nature will reduce the noise in
   exchange for the image appearing blurred.\\
@@ -119,15 +119,39 @@
   \begin{center}
     $E(I) = \iint C(\| \nabla_{I} \|) dx dy$
   \end{center}
-  We will work to develop a custom penalty $C(\| \nabla_{I}\|)$ that supports
+  Note that the penalty $C(\| \nabla_{I} \|)$
+  must be strictly increasing for the diffusion to be well-posed. We can then
+  arrive at our PDE via gradient descent\\
+
+  \begin{center}
+    \begin{tabular}{l}
+      \vspace{12pt}
+      $L(I,I_{x},I_{y},x,y) = C(\| \nabla_{I} \|)$\\
+      \vspace{12pt}
+      $L_{I} = 0$\\
+      \vspace{12pt}
+      $L_{I_{x}} = \dot{C}(\| \nabla_{I} \|) \frac{I_{x}}{\| \nabla_{I} \|}$\\
+      \vspace{12pt}
+      $L_{I_{y}} = \dot{C}(\| \nabla_{I} \|) \frac{I_{y}}{\| \nabla_{I} \|}$\\
+      \vspace{12pt}
+      $\nabla_{I}E = L_{I} - \frac{\partial}{\partial x}L_{I_{x}} - \frac{\partial}{\partial y}L_{I_{y}}$\\
+      \vspace{12pt}
+      $I_{t} = -\nabla_{I}E$\\
+      \vspace{12pt}
+      $I_{t} = -L_{I} + \frac{\partial}{\partial x}L_{I_{x}} + \frac{\partial}{\partial y}L_{I_{y}}$\\
+      \vspace{12pt}
+      $I_{t} = \frac{\partial}{\partial x}(\dot{C}(\| \nabla_{I} \|) \frac{I_{x}}{\| \nabla_{I} \|}) + \frac{\partial}{\partial y}(\dot{C}(\| \nabla_{I} \|) \frac{I_{y}}{\| \nabla_{I} \|})$\\
+      \vspace{12pt}
+      $I_{t} = \nabla \cdot (\frac {\dot{C}(\| \nabla_{I} \|)}{\| \nabla_{I} \|} \nabla I)$
+    \end{tabular}
+  \end{center}
+
+  \noindent
+  Now we will work to develop a custom penalty $C(\| \nabla_{I}\|)$ that supports
   enhanced edge preservation for specific images.
 
-  SHOW THE GENERAL Anisotropic DIFFUSION FORMULAS HERE!!!!
-
+  \newpage
   \subsection{Image Profiling}
-  NEED TO REPLACE WITH REGULAR NOISE!!
-
-
   Consider the following images
   \begin{figure}[!htb]
     \begin{center}
@@ -142,7 +166,6 @@
       \end{subfigure}
     \end{center}
   \end{figure}
-
 
   \noindent
   We can compute the magnitude gradient at each pixel in the image using the following
