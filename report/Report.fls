@@ -123,6 +123,13 @@ INPUT ..\report_images\noisy.png
 INPUT ..\report_images\noisy.png
 INPUT ..\report_images\noisy.png
 INPUT ..\report_images\noisy.png
+INPUT ..\report_images\noisy_grad.png
+INPUT ..\report_images\noisy_grad.png
+INPUT ..\report_images\noisy_grad.png
+INPUT ..\report_images\noisy_grad.png
+INPUT ..\report_images\noisy_grad.png
+INPUT ..\report_images\noisy_grad.png
+INPUT ..\report_images\noisy_grad.png
 INPUT ..\report_images\gradient.png
 INPUT ..\report_images\gradient.png
 INPUT ..\report_images\gradient.png

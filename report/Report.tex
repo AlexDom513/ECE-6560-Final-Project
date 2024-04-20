@@ -43,6 +43,10 @@
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
   \section{Mathematical Modeling}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Introduction
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \subsection{Introduction}
   Before explicitly developing our PDE, we must first understand the behavior that we want our system to have.
   We will leverage the Calculus of Variations. This is a powerful framework that will help arrive at a PDE
@@ -108,6 +112,9 @@
     \includegraphics[scale=0.5]{../report_images/linear.png}
   \end{center}
 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Anisotropic Diffusion
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
   \noindent
   \subsection{Anisotropic Diffusion}
@@ -150,6 +157,9 @@
   Now we will work to develop a custom penalty $C(\| \nabla_{I}\|)$ that supports
   enhanced edge preservation for specific images.
 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Image Profiling
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
   \subsection{Image Profiling}
   Consider the following images
@@ -176,9 +186,15 @@
       $I_{x}(x,y,t) = \frac{I(x+\Delta x,y,t) - I(x-\Delta x,y,t)}{2\Delta x}$\\
       \vspace{12pt}
       $I_{y}(x,y,t) = \frac{I(x,y+\Delta y,t) - I(x,y-\Delta y,t)}{2\Delta y}$\\
-      \vspace{12pt}
       $\| \nabla_{I} \| = \sqrt{I_{x}^2 + I_{y}^2}$\\
     \end{tabular}
+  \end{center}
+
+  \noindent
+  The following image shows the magnitude gradient at each pixel in the noisy image.
+  Edges take on a lighter color while darker sections reflect more uniform areas of the image.
+  \begin{center}
+    \includegraphics[scale=0.5]{../report_images/noisy_grad.png}
   \end{center}
 
   \newpage
@@ -202,27 +218,12 @@
   \vspace{12pt}
 
   \noindent
-  The goal of this penalty is only have smoothing at the gradients
-  that are corrputing the image. By keeping a flat penalty in the
-  other regions, we will greatly reduce the amount of diffusion that
+  The goal of this penalty is to only have smoothing at the gradients
+  that are corrputing the image. By keeping a nearly flat penalty in the for
+  the higher gradient, we will greatly reduce the amount of diffusion that
   takes place along the edges.
 
-  \noindent
-  $\| \nabla_{I} \|$
 
-
-
-
-
-
-
-
-
-
-
-
-
-    
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Derivation of PDE
@@ -230,7 +231,7 @@
   \newpage
   \section{Derivation of PDE}
 
-    \noindent Now, let's introduce the Euler-Lagrange equation
+    \noindent Now, recall the Euler-Lagrange equation
       \begin{center}
         \begin{tabular}{l}
           $L_{f} - \frac{\partial}{\partial x}L_{f'} = 0$ (1-D)\\
@@ -385,6 +386,9 @@
   The PDE that was obtained in the previous section is only applicable for continuous
   time and space variables. We must discretize the PDE so that it can actually be implemented in software.\\
 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Numerical Differentiation
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \subsection{Numerical Differentiation}
   \noindent
   Before explicitly discretizing the PDE, we must also obtain numeric approximations for its partial
@@ -501,6 +505,9 @@
     \end{tabular}
   \end{center}
 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Parameter Selection
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
   \subsection{Parameter Selection}
   \noindent
@@ -553,6 +560,9 @@
   Finally, we will iterate through each pixel in the image and compute how the pixel should
   be updated based on the PDE.
 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Implementation Summary
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
   \subsection{Implementation Summary}
   \noindent
@@ -622,10 +632,15 @@
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  % Experimental Procedure
+  % Experiment
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
-  \section{Experimental Procedure}
+  \section{Experiment}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Procedure
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \subsection{Procedure}
   \begin{enumerate}
     \item Select image and load into program.
     \item Run gradient histogram to understand characteristics of image.
@@ -634,17 +649,17 @@
     \item After MSE reaches minimum and begins to increase, run 20 iterations past this point.
   \end{enumerate}
 
-
-
-
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  % Experimental Results
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Results
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
-  \section{Experimental Results}
+  \subsection{Results}
 
 
-  \section{Summary}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Conclusion
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{Conclusion}
 
 
   \begin{thebibliography}{unsrt}
