@@ -15,7 +15,6 @@ from PIL import Image
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -75,8 +74,79 @@ class Linear_Heat(PDE):
       self.MSE_arr.append(self.MSE())
       if (iter % self.skip == 0):
         print('Linear Heat iteration ' + str(iter) + ' / ' + str(iterations))
-    print('Linear Heat complete!')
-    return self.MSE_arr
+  
+######################################################################
+# Total Variation PDE
+######################################################################
+class Total_Variation(PDE):
+  def __init__(self, img_path, timestep, iterations):
+    super().__init__(img_path, timestep, iterations)
+    self.E = 0.5
+
+  def run(self):
+    for iter in range(self.iterations):
+      for i in range(1,self.I.shape[0]-1):
+        for j in range(1,self.I.shape[1]-1):
+          self.I[i,j] = self.I[i,j] + self.timestep * (((self.Ix(i,j)**2)*self.Iyy(i,j) - 2*self.Ix(i,j)*self.Iy(i,j)*self.Ixy(i,j) + 
+                                                        (self.Iy(i,j)**2)*self.Ixx(i,j) + (self.E**2)*(self.Ixx(i,j) + self.Iyy(i,j))) / 
+                                                      (((self.Ix(i,j)**2) + (self.Iy(i,j)**2) + (self.E**2))**(3/2)))
+      self.MSE_arr.append(self.MSE())
+      if (iter % self.skip == 0):
+        print('TV iteration ' + str(iter) + ' / ' + str(iterations))
+
+######################################################################
+# Custom (Sigmoidal Penalty) PDE
+######################################################################
+class Custom(PDE):
+  def __init__(self, img_path, timestep, iterations):
+    super().__init__(img_path, timestep, iterations)
+    self.E = 0.5
+    self.lambda_const = 100
+    self.beta_const = 10.3
+    self.c_const = 20
+
+  def gradient(self, Ix, Iy, power):
+    Ix_squared = np.power(Ix, 2)
+    Iy_squared = np.power(Iy, 2)
+    return np.power(Ix_squared + Iy_squared + (self.E**2), power)
+  
+  def e_alpha(self, beta, Ix_input, Iy_input, c):
+    currGradient = self.gradient(Ix_input, Iy_input, -.5)
+    return np.exp((-1/beta) * (currGradient - c))
+  
+  def dDx_LIx(self, k, beta, c, Ix_input, Iy_input, Ixx_input, Ixy_input):
+    e_alpha = self.e_alpha(beta,Ix_input,Iy_input,c)
+    gradient_1 = self.gradient(Ix_input,Iy_input,-.5)
+    gradient_2 = self.gradient(Ix_input,Iy_input,-1.5)
+    return (k/beta) * ( Ixx_input*gradient_1 - Ix_input*gradient_2 * (Ix_input*Ixx_input + Iy_input*Ixy_input) * ( e_alpha / ((1+e_alpha)**2) ) +
+                        Ix_input*gradient_1 * (-1/beta) * e_alpha * gradient_1 * (Ix_input*Ixx_input + Iy_input*Ixy_input) * ( ((1+e_alpha)**-2) + e_alpha * (-2) * ((1+e_alpha)**-3) ))
+
+  def dDy_LIy(self, k, beta, c, Ix_input, Iy_input, Iyy_input, Ixy_input):
+    e_alpha = self.e_alpha(beta,Ix_input,Iy_input,c)
+    gradient_1 = self.gradient(Ix_input,Iy_input,-.5)
+    gradient_2 = self.gradient(Ix_input,Iy_input,-1.5)
+    return (k/beta) * ( Iyy_input*gradient_1 - Iy_input*gradient_2 * (Ix_input*Ixy_input + Iy_input*Iyy_input) * ( e_alpha / ((1+e_alpha)**2) ) +
+                        Iy_input*gradient_1 * (-1/beta) * e_alpha * gradient_1 * (Ix_input*Ixy_input + Iy_input*Iyy_input) * ( ((1+e_alpha)**-2) + e_alpha * (-2) * ((1+e_alpha)**-3) ))
+
+  def run(self):
+    for iter in range(self.iterations):
+      for i in range(1,self.I.shape[0]-1):
+        for j in range(1,self.I.shape[1]-1):
+
+          # compute partial derivatives
+          Ix  = self.Ix(i,j)
+          Iy  = self.Iy(i,j)
+          Ixx = self.Ixx(i,j)
+          Iyy = self.Iyy(i,j)
+          Ixy = self.Ixy(i,j)
+
+          # compute update
+          self.I[i,j] = self.I[i,j] + self.timestep * (self.dDx_LIx(self.lambda_const,self.beta_const,self.c_const,Ix,Iy,Ixx,Ixy) + 
+                                                       self.dDy_LIy(self.lambda_const,self.beta_const,self.c_const,Ix,Iy,Iyy,Ixy))
+      self.MSE_arr.append(self.MSE())
+      if (iter % self.skip == 0):
+        print('Custom iteration ' + str(iter) + ' / ' + str(iterations))
+
   
 
 
@@ -92,7 +162,15 @@ if __name__ == "__main__":
   timestep = .01
   iterations = 100
   linerHeat = Linear_Heat(img_path, timestep, iterations)
-  MSE = linerHeat.run()
+  linerHeat.run()
 
-  plt.plot(MSE)
+  #tv = Total_Variation(img_path, timestep, iterations)
+  #tv.run()
+
+  custom = Custom(img_path, timestep, iterations)
+  custom.run()
+
+  #plt.plot(tv.MSE_arr)
+  #plt.plot(linerHeat.MSE_arr)
+  plt.plot(custom.MSE_arr)
   plt.show()
