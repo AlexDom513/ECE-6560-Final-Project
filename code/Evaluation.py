@@ -35,10 +35,12 @@ class PDE:
     noise = np.random.normal(mean, std_dev, (img.shape[0],img.shape[1]))
 
     self.I = img + noise
+    self.I_min_MSE = img + noise
     self.I_orig = img
     self.timestep = timestep
     self.iterations = iterations
     self.skip = 10
+    self.min_MSE = 1e10
     self.MSE_arr = []
 
   def Ix(self,i,j):
@@ -57,7 +59,11 @@ class PDE:
     return (self.I[i+1,j+1] - self.I[i+1,j-1] - self.I[i-1,j+1] + self.I[i-1,j-1]) / 4
   
   def MSE(self):
-    return np.mean(np.power(self.I_orig - self.I, 2))
+    currMSE = np.mean(np.power(self.I_orig - self.I, 2))
+    if (currMSE < self.min_MSE):
+      self.min_MSE = currMSE
+      self.I_min_MSE = self.I
+    return currMSE
 
 ######################################################################
 # Linear Heat PDE
@@ -81,7 +87,7 @@ class Linear_Heat(PDE):
 class Total_Variation(PDE):
   def __init__(self, img_path, timestep, iterations):
     super().__init__(img_path, timestep, iterations)
-    self.E = 0.5
+    self.E = 1
 
   def run(self):
     for iter in range(self.iterations):
@@ -100,7 +106,7 @@ class Total_Variation(PDE):
 class Custom(PDE):
   def __init__(self, img_path, timestep, iterations):
     super().__init__(img_path, timestep, iterations)
-    self.E = 0.5
+    self.E = 1
     self.lambda_const = 100
     self.beta_const = 10.3
     self.c_const = 20
@@ -147,30 +153,42 @@ class Custom(PDE):
       if (iter % self.skip == 0):
         print('Custom iteration ' + str(iter) + ' / ' + str(iterations))
 
-  
-
-
-
-
-
-
 
 if __name__ == "__main__":
 
-  # linear heat equation
+  # shared parameters
   img_path = './images/boats.bmp'
   timestep = .01
   iterations = 100
+
+  # linear heat
   linerHeat = Linear_Heat(img_path, timestep, iterations)
   linerHeat.run()
 
-  #tv = Total_Variation(img_path, timestep, iterations)
-  #tv.run()
+  # total variation
+  tv = Total_Variation(img_path, timestep, iterations)
+  tv.run()
 
+  # custom (sigmoidal penalty)
   custom = Custom(img_path, timestep, iterations)
   custom.run()
 
-  #plt.plot(tv.MSE_arr)
-  #plt.plot(linerHeat.MSE_arr)
-  plt.plot(custom.MSE_arr)
+  # MSE plots
+  plt.title('MSE vs. Diffusion Iterations')
+  plt.xlabel('Iteration Number')
+  plt.ylabel('MSE')
+  plt.plot(linerHeat.MSE_arr, label='Quadratic Penalty')
+  plt.plot(tv.MSE_arr, label='Linear Penalty')
+  plt.plot(custom.MSE_arr, label='Sigmoidal Penalty')
+  plt.legend()
+  plt.show()
+
+  # obtain images with lowest MSE
+  plt.imshow(linerHeat.I_min_MSE, cmap='gray')
+  plt.show()
+
+  plt.imshow(tv.I_min_MSE, cmap='gray')
+  plt.show()
+
+  plt.imshow(custom.I_min_MSE, cmap='gray')
   plt.show()
