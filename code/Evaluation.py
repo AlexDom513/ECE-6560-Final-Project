@@ -12,6 +12,7 @@
 ######################################################################
 
 from PIL import Image
+from skimage.metrics import structural_similarity as ssim
 import os
 import sys
 import numpy as np
@@ -35,14 +36,22 @@ class PDE:
     std_dev = 20
     noise = np.random.normal(mean, std_dev, (img.shape[0],img.shape[1]))
 
+    # images
     self.I = img + noise
-    self.I_min_MSE = img + noise
+    self.I_min_MSE = np.copy(self.I)
+    self.I_max_SSIM = np.copy(self.I)
     self.I_orig = img
+
+    # shared parameters
     self.timestep = timestep
     self.iterations = iterations
     self.skip = 10
+
+    # image quality data
     self.min_MSE = 1e10
+    self.max_SSIM = 0
     self.MSE_arr = []
+    self.SSIM_arr = []
 
   def Ix(self,i,j):
     return (self.I[i+1,j] - self.I[i-1,j]) / 2
@@ -63,8 +72,16 @@ class PDE:
     currMSE = np.mean(np.power(self.I_orig - self.I, 2))
     if (currMSE < self.min_MSE):
       self.min_MSE = currMSE
-      self.I_min_MSE = self.I
+      self.I_min_MSE = np.copy(self.I)
     return currMSE
+  
+  def SSIM(self):
+    currSSIM = ssim(self.I_orig, self.I, data_range=self.I.max() - self.I.min())
+    if (currSSIM > self.max_SSIM):
+      self.max_SSIM = currSSIM
+      self.I_max_SSIM = np.copy(self.I)
+    return currSSIM
+
 
 ######################################################################
 # Linear Heat PDE
@@ -79,6 +96,7 @@ class Linear_Heat(PDE):
         for j in range(1,self.I.shape[1]-1):
           self.I[i,j] = self.I[i,j] + self.timestep * (self.Ixx(i,j) + (self.Iyy(i,j)))
       self.MSE_arr.append(self.MSE())
+      self.SSIM_arr.append(self.SSIM())
       if (iter % self.skip == 0):
         print('Linear Heat iteration ' + str(iter) + ' / ' + str(iterations))
   
@@ -168,7 +186,7 @@ if __name__ == "__main__":
   print('Test 3 - Aggressive Smoothing')
   print('Test 4 - Tempered Smoothing')
   try:
-    test_num = int(input('Enter Test Option (1,2,3 or 4) '))
+    test_num = int(input('Enter Test Option (1,2,3,4) '))
   except:
     print('Invalid Test Entered!')
     sys.exit()
@@ -183,7 +201,7 @@ if __name__ == "__main__":
     linerHeat = Linear_Heat(img_path, timestep, iterations)
     linerHeat.run()
 
-    ###### - TV - ######
+    ##### - TV - ######
     timestep = .1
     E = 4
     tv = Total_Variation(img_path, timestep, iterations, E)
@@ -204,6 +222,7 @@ if __name__ == "__main__":
   if (test_num == 2):
 
     ###### - Linear Heat - ######
+    timestep = .05
     linerHeat = Linear_Heat(img_path, timestep, iterations)
     linerHeat.run()
 
@@ -253,21 +272,27 @@ if __name__ == "__main__":
   plt.show()
 
   # obtain images with lowest MSE and save
+  plt.title('Linear Heat')
   plt.imshow(linerHeat.I_min_MSE, cmap='gray')
+  print('Linear Heat minimum MSE: ' + str(linerHeat.min_MSE))
   file_name = 'LinearHeat_test' + str(test_num) + '.png'
   save_path = os.path.join(curr_dir,folder_name)
   save_path = os.path.join(save_path,file_name)
   plt.savefig(save_path)
   plt.show()
 
+  plt.title('TV')
   plt.imshow(tv.I_min_MSE, cmap='gray')
+  print('TV minimum MSE: ' + str(tv.min_MSE))
   file_name = 'TV_test' + str(test_num) + '.png'
   save_path = os.path.join(curr_dir,folder_name)
   save_path = os.path.join(save_path,file_name)
   plt.savefig(save_path)
   plt.show()
 
+  plt.title('Custom')
   plt.imshow(custom.I_min_MSE, cmap='gray')
+  print('Custom minimum MSE: ' + str(custom.min_MSE))
   file_name = 'Custom_test' + str(test_num) + '.png'
   save_path = os.path.join(curr_dir,folder_name)
   save_path = os.path.join(save_path,file_name)

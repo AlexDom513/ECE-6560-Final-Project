@@ -1,5 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1713723774.08932 "c:/Users/Admin/Desktop/School/Georgia Tech/Coursework/ECE 6560/Final Project/ECE-6560--Final-Project/report/Report.tex" "Report.pdf" "Report" 1713723775.32698 0
+["pdflatex"] 1713729027.91067 "c:/Users/Admin/Desktop/School/Georgia Tech/Coursework/ECE 6560/Final Project/ECE-6560--Final-Project/report/Report.tex" "Report.pdf" "Report" 1713729029.7259 0
+  "../generated_images/LinearHeat_test1.png" 1713729025 29173 ffb61477b775e6116023dcd9ce9a1ad6 ""
+  "../generated_images/TV_test1.png" 1713729027 25898 70254fedb490c1f8e733b9e38ace8e11 ""
   "../report_images/aggressive_smoothing.png" 1713671639 37297 48ce291661927d6dcfcc3a5751ffd1a8 ""
   "../report_images/baseline_smoothing.png" 1713718929 45624 2acb7bf45cfd02c00d17e7a380a990da ""
   "../report_images/boat_crop.png" 1713669245 57675 4a8df46ac4e1434b8801df048040b509 ""
@@ -11,7 +13,7 @@
   "../report_images/sigmoid.png" 1713499999 12787 fc453f8537a277147a4a816e45d7ac6e ""
   "../report_images/squared.png" 1713324937 7776 a4690a842f06075a5f03db4ea43b2454 ""
   "../report_images/tempered_smoothing.png" 1713670849 40733 acec30ad4713b17d30856c442f859010 ""
-  "C:/Users/Admin/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1713497467 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
+  "C:/Users/Admin/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1713724679 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/Admin/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1711420322 24236006 12449df830ea0fbde8fd4c887896e885 ""
   "C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
   "C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1233951848 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -76,9 +78,9 @@
   "C:/Users/Admin/AppData/Local/Programs/MiKTeX/tex/latex/graphics/keyval.sty" 1665067579 2671 7e67d78d9b88c845599a85b2d41f2e39 ""
   "C:/Users/Admin/AppData/Local/Programs/MiKTeX/tex/latex/graphics/trig.sty" 1665067579 4023 293ea1c16429fc0c4cf605f4da1791a9 ""
   "C:/Users/Admin/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1710412547 29918 d08e4795c0778dfb000e82d9225c6ce2 ""
-  "Report.aux" 1713723775 1641 3558d6cfecc8f453307a8e397c6adff5 "pdflatex"
-  "Report.tex" 1713723771 32407 ca49cef8e163851ffd2d4116f351cff0 ""
-  "c:/Users/Admin/Desktop/School/Georgia Tech/Coursework/ECE 6560/Final Project/ECE-6560--Final-Project/report/Report.tex" 1713723771 32407 ca49cef8e163851ffd2d4116f351cff0 ""
+  "Report.aux" 1713729029 1750 3f67072dbf5cd52b3734fdaa9e24dfbb "pdflatex"
+  "Report.tex" 1713726415 33383 ad96d4693c2e494603093c96294548fc ""
+  "c:/Users/Admin/Desktop/School/Georgia Tech/Coursework/ECE 6560/Final Project/ECE-6560--Final-Project/report/Report.tex" 1713726415 33383 ad96d4693c2e494603093c96294548fc ""
   (generated)
   "Report.aux"
   "Report.log"
