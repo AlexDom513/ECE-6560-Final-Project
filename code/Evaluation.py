@@ -227,12 +227,13 @@ if __name__ == "__main__":
     linerHeat.run()
 
     ###### - TV - ######
-    E = 1
+    E = 4
+    timestep = .1
     tv = Total_Variation(img_path, timestep, iterations, E)
     tv.run()
 
     ###### - Custom - ######
-    E = 1
+    E = 4
     lambda_const = 87
     beta_const = 20
     c_const = 43

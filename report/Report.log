@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.3) (preloaded format=pdflatex 2024.3.25)  21 APR 2024 14:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.3) (preloaded format=pdflatex 2024.3.25)  21 APR 2024 15:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -352,62 +352,74 @@ File: ../generated_images/TV_test1.png Graphic file (type png)
 Package pdftex.def Info: ../generated_images/TV_test1.png  used on input line 686.
 (pdftex.def)             Requested size: 345.0pt x 258.76335pt.
  [16 <../generated_images/LinearHeat_test1.png> <../generated_images/TV_test1.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 694--695
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 696--700
+
+ []
+
 <../report_images/baseline_smoothing.png, id=86, 803.0pt x 803.0pt>
 File: ../report_images/baseline_smoothing.png Graphic file (type png)
 <use ../report_images/baseline_smoothing.png>
-Package pdftex.def Info: ../report_images/baseline_smoothing.png  used on input line 702.
-(pdftex.def)             Requested size: 120.4448pt x 120.4448pt.
-
-Overfull \hbox (112.08409pt too wide) in paragraph at lines 697--704
-[] 
- []
-
-[17 <../report_images/baseline_smoothing.png>]
-<../report_images/linear_smoothing.png, id=91, 803.0pt x 803.0pt>
+Package pdftex.def Info: ../report_images/baseline_smoothing.png  used on input line 701.
+(pdftex.def)             Requested size: 80.3047pt x 80.3047pt.
+<../generated_images/MSE_test1.png, id=87, 462.528pt x 346.896pt>
+File: ../generated_images/MSE_test1.png Graphic file (type png)
+<use ../generated_images/MSE_test1.png>
+Package pdftex.def Info: ../generated_images/MSE_test1.png  used on input line 708.
+(pdftex.def)             Requested size: 185.0079pt x 138.75594pt.
+<../generated_images/Custom_test1.png, id=88, 462.528pt x 346.896pt>
+File: ../generated_images/Custom_test1.png Graphic file (type png)
+<use ../generated_images/Custom_test1.png>
+Package pdftex.def Info: ../generated_images/Custom_test1.png  used on input line 711.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+[17 <../report_images/baseline_smoothing.png> <../generated_images/MSE_test1.png> <../generated_images/Custom_test1.png>]
+<../report_images/linear_smoothing.png, id=95, 803.0pt x 803.0pt>
 File: ../report_images/linear_smoothing.png Graphic file (type png)
 <use ../report_images/linear_smoothing.png>
-Package pdftex.def Info: ../report_images/linear_smoothing.png  used on input line 708.
+Package pdftex.def Info: ../report_images/linear_smoothing.png  used on input line 717.
 (pdftex.def)             Requested size: 80.3047pt x 80.3047pt.
-
-Overfull \hbox (23.9708pt too wide) in paragraph at lines 706--709
-\OT1/cmr/m/n/10 Custom PDE slope match-ing lin-ear penalty for range 10 to 75 [] 
- []
-
-[18 <../report_images/linear_smoothing.png>]
-<../report_images/aggressive_smoothing.png, id=96, 803.0pt x 803.0pt>
+File: ../generated_images/MSE_test1.png Graphic file (type png)
+<use ../generated_images/MSE_test1.png>
+Package pdftex.def Info: ../generated_images/MSE_test1.png  used on input line 723.
+(pdftex.def)             Requested size: 185.0079pt x 138.75594pt.
+File: ../generated_images/Custom_test1.png Graphic file (type png)
+<use ../generated_images/Custom_test1.png>
+Package pdftex.def Info: ../generated_images/Custom_test1.png  used on input line 726.
+(pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
+ [18 <../report_images/linear_smoothing.png>]
+<../report_images/aggressive_smoothing.png, id=100, 803.0pt x 803.0pt>
 File: ../report_images/aggressive_smoothing.png Graphic file (type png)
 <use ../report_images/aggressive_smoothing.png>
-Package pdftex.def Info: ../report_images/aggressive_smoothing.png  used on input line 713.
+Package pdftex.def Info: ../report_images/aggressive_smoothing.png  used on input line 732.
 (pdftex.def)             Requested size: 80.3047pt x 80.3047pt.
  [19 <../report_images/aggressive_smoothing.png>]
-<../report_images/tempered_smoothing.png, id=102, 803.0pt x 803.0pt>
+<../report_images/tempered_smoothing.png, id=106, 803.0pt x 803.0pt>
 File: ../report_images/tempered_smoothing.png Graphic file (type png)
 <use ../report_images/tempered_smoothing.png>
-Package pdftex.def Info: ../report_images/tempered_smoothing.png  used on input line 718.
+Package pdftex.def Info: ../report_images/tempered_smoothing.png  used on input line 737.
 (pdftex.def)             Requested size: 80.3047pt x 80.3047pt.
-
-Overfull \hbox (21.0263pt too wide) in paragraph at lines 716--719
-\OT1/cmr/m/n/10 Custom PDE slope less than lin-ear penalty for range 10 to 75 [] 
- []
-
-[20 <../report_images/tempered_smoothing.png>] [21] (Report.aux)
+ [20 <../report_images/tempered_smoothing.png>] [21] (Report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-03-14>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4105 strings out of 474424
- 69597 string characters out of 5741739
+ 4117 strings out of 474424
+ 70114 string characters out of 5741739
  1942496 words of memory out of 5000000
- 26440 multiletter control sequences out of 15000+600000
+ 26452 multiletter control sequences out of 15000+600000
  566884 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 67i,11n,77p,449b,535s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 67i,10n,77p,449b,535s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Report.pdf (21 pages, 624351 bytes).
+Output written on Report.pdf (21 pages, 685981 bytes).
 PDF statistics:
- 177 PDF objects out of 1000 (max. 8388607)
+ 181 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
 
