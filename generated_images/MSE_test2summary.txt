@@ -1,0 +1,4 @@
+test2 minimum MSE values:
+linear heat: 87.87927257622843
+tv: 89.72858801107137
+custom: 91.19128313509398

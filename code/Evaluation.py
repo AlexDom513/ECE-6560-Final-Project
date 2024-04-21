@@ -12,7 +12,6 @@
 ######################################################################
 
 from PIL import Image
-from skimage.metrics import structural_similarity as ssim
 import os
 import sys
 import numpy as np
@@ -39,7 +38,6 @@ class PDE:
     # images
     self.I = img + noise
     self.I_min_MSE = np.copy(self.I)
-    self.I_max_SSIM = np.copy(self.I)
     self.I_orig = img
 
     # shared parameters
@@ -49,9 +47,7 @@ class PDE:
 
     # image quality data
     self.min_MSE = 1e10
-    self.max_SSIM = 0
     self.MSE_arr = []
-    self.SSIM_arr = []
 
   def Ix(self,i,j):
     return (self.I[i+1,j] - self.I[i-1,j]) / 2
@@ -74,13 +70,6 @@ class PDE:
       self.min_MSE = currMSE
       self.I_min_MSE = np.copy(self.I)
     return currMSE
-  
-  def SSIM(self):
-    currSSIM = ssim(self.I_orig, self.I, data_range=self.I.max() - self.I.min())
-    if (currSSIM > self.max_SSIM):
-      self.max_SSIM = currSSIM
-      self.I_max_SSIM = np.copy(self.I)
-    return currSSIM
 
 
 ######################################################################
@@ -96,7 +85,6 @@ class Linear_Heat(PDE):
         for j in range(1,self.I.shape[1]-1):
           self.I[i,j] = self.I[i,j] + self.timestep * (self.Ixx(i,j) + (self.Iyy(i,j)))
       self.MSE_arr.append(self.MSE())
-      self.SSIM_arr.append(self.SSIM())
       if (iter % self.skip == 0):
         print('Linear Heat iteration ' + str(iter) + ' / ' + str(iterations))
   
@@ -192,7 +180,7 @@ if __name__ == "__main__":
     sys.exit()
 
   #################################
-  # test 1 - Baseline Smoothing
+  # test 1
   #################################
   if (test_num == 1):
     
@@ -244,16 +232,49 @@ if __name__ == "__main__":
   # test 3
   #################################
   if (test_num == 3):
-    pass
+
+    ###### - Linear Heat - ######
+    timestep = .05
+    linerHeat = Linear_Heat(img_path, timestep, iterations)
+    linerHeat.run()
+
+    ###### - TV - ######
+    E = 4
+    timestep = .1
+    tv = Total_Variation(img_path, timestep, iterations, E)
+    tv.run()
+
+    ###### - Custom - ######
+    E = 4
+    lambda_const = 90
+    beta_const = 4
+    c_const = 43
+    custom = Custom(img_path, timestep, iterations, E, lambda_const, beta_const, c_const)
+    custom.run()
 
   #################################
   # test 4
   #################################
   if (test_num == 4):
-    pass
 
-  else:
-    pass
+    ###### - Linear Heat - ######
+    timestep = .05
+    linerHeat = Linear_Heat(img_path, timestep, iterations)
+    linerHeat.run()
+
+    ###### - TV - ######
+    E = 4
+    timestep = .1
+    tv = Total_Variation(img_path, timestep, iterations, E)
+    tv.run()
+
+    ###### - Custom - ######
+    E = 4
+    lambda_const = 50
+    beta_const = 27
+    c_const = 46
+    custom = Custom(img_path, timestep, iterations, E, lambda_const, beta_const, c_const)
+    custom.run()
 
   # MSE plots
   curr_dir = os.getcwd()
@@ -299,3 +320,13 @@ if __name__ == "__main__":
   save_path = os.path.join(save_path,file_name)
   plt.savefig(save_path)
   plt.show()
+
+  # write the minimum computed MSE to a file
+  file_name = 'MSE_test' + str(test_num) + 'summary' + '.txt'
+  save_path = os.path.join(curr_dir,folder_name)
+  save_path = os.path.join(save_path,file_name)
+  with open(save_path, 'w') as file:
+    file.write('test' + str(test_num) + ' minimum MSE values:\n')
+    file.write('linear heat: ' + str(linerHeat.min_MSE) + '\n')
+    file.write('tv: ' + str(tv.min_MSE) + '\n')
+    file.write('custom: ' + str(custom.min_MSE) + '\n')
