@@ -13,6 +13,7 @@
 
 from PIL import Image
 import os
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import warnings
@@ -85,9 +86,9 @@ class Linear_Heat(PDE):
 # Total Variation PDE
 ######################################################################
 class Total_Variation(PDE):
-  def __init__(self, img_path, timestep, iterations):
+  def __init__(self, img_path, timestep, iterations, E):
     super().__init__(img_path, timestep, iterations)
-    self.E = 1
+    self.E = E
 
   def run(self):
     for iter in range(self.iterations):
@@ -104,12 +105,12 @@ class Total_Variation(PDE):
 # Custom (Sigmoidal Penalty) PDE
 ######################################################################
 class Custom(PDE):
-  def __init__(self, img_path, timestep, iterations):
+  def __init__(self, img_path, timestep, iterations, E, lambda_const, beta_const, c_const):
     super().__init__(img_path, timestep, iterations)
-    self.E = 1
-    self.lambda_const = 87
-    self.beta_const = 20
-    self.c_const = 43
+    self.E = E
+    self.lambda_const = lambda_const
+    self.beta_const = beta_const
+    self.c_const = c_const
 
   def gradient(self, Ix, Iy, power):
     Ix_squared = np.power(Ix, 2)
@@ -159,21 +160,85 @@ if __name__ == "__main__":
   # shared parameters
   img_path = './images/boats.bmp'
   timestep = .01
-  iterations = 100
+  iterations = 200
 
-  # linear heat
-  linerHeat = Linear_Heat(img_path, timestep, iterations)
-  linerHeat.run()
+  # prompt user
+  print('Test 1 - Baseline Smoothing')
+  print('Test 2 - Linear Smoothing')
+  print('Test 3 - Aggressive Smoothing')
+  print('Test 4 - Tempered Smoothing')
+  try:
+    test_num = int(input('Enter Test Option (1,2,3 or 4) '))
+  except:
+    print('Invalid Test Entered!')
+    sys.exit()
 
-  # total variation
-  tv = Total_Variation(img_path, timestep, iterations)
-  tv.run()
+  #################################
+  # test 1 - Baseline Smoothing
+  #################################
+  if (test_num == 1):
+    
+    ###### - Linear Heat - ######
+    timestep = .05
+    linerHeat = Linear_Heat(img_path, timestep, iterations)
+    linerHeat.run()
 
-  # custom (sigmoidal penalty)
-  custom = Custom(img_path, timestep, iterations)
-  custom.run()
+    ###### - TV - ######
+    timestep = .1
+    E = 4
+    tv = Total_Variation(img_path, timestep, iterations, E)
+    tv.run()
+
+    ###### - Custom - ######
+    timestep = .1
+    E = 4
+    lambda_const = 1
+    beta_const = 1
+    c_const = 0
+    custom = Custom(img_path, timestep, iterations, E, lambda_const, beta_const, c_const)
+    custom.run()
+
+  #################################
+  # test 2
+  #################################
+  if (test_num == 2):
+
+    ###### - Linear Heat - ######
+    linerHeat = Linear_Heat(img_path, timestep, iterations)
+    linerHeat.run()
+
+    ###### - TV - ######
+    E = 1
+    tv = Total_Variation(img_path, timestep, iterations, E)
+    tv.run()
+
+    ###### - Custom - ######
+    E = 1
+    lambda_const = 87
+    beta_const = 20
+    c_const = 43
+    custom = Custom(img_path, timestep, iterations, E, lambda_const, beta_const, c_const)
+    custom.run()
+
+  #################################
+  # test 3
+  #################################
+  if (test_num == 3):
+    pass
+
+  #################################
+  # test 4
+  #################################
+  if (test_num == 4):
+    pass
+
+  else:
+    pass
 
   # MSE plots
+  curr_dir = os.getcwd()
+  folder_name = 'generated_images'
+
   plt.title('MSE vs. Diffusion Iterations')
   plt.xlabel('Iteration Number')
   plt.ylabel('MSE')
@@ -181,14 +246,30 @@ if __name__ == "__main__":
   plt.plot(tv.MSE_arr, label='Linear Penalty')
   plt.plot(custom.MSE_arr, label='Sigmoidal Penalty')
   plt.legend()
+  file_name = 'MSE_test' + str(test_num) + '.png'
+  save_path = os.path.join(curr_dir,folder_name)
+  save_path = os.path.join(save_path,file_name)
+  plt.savefig(save_path)
   plt.show()
 
-  # obtain images with lowest MSE
+  # obtain images with lowest MSE and save
   plt.imshow(linerHeat.I_min_MSE, cmap='gray')
+  file_name = 'LinearHeat_test' + str(test_num) + '.png'
+  save_path = os.path.join(curr_dir,folder_name)
+  save_path = os.path.join(save_path,file_name)
+  plt.savefig(save_path)
   plt.show()
 
   plt.imshow(tv.I_min_MSE, cmap='gray')
+  file_name = 'TV_test' + str(test_num) + '.png'
+  save_path = os.path.join(curr_dir,folder_name)
+  save_path = os.path.join(save_path,file_name)
+  plt.savefig(save_path)
   plt.show()
 
   plt.imshow(custom.I_min_MSE, cmap='gray')
+  file_name = 'Custom_test' + str(test_num) + '.png'
+  save_path = os.path.join(curr_dir,folder_name)
+  save_path = os.path.join(save_path,file_name)
+  plt.savefig(save_path)
   plt.show()

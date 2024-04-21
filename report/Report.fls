@@ -145,7 +145,6 @@ INPUT ..\report_images\sigmoid.png
 INPUT ..\report_images\sigmoid.png
 INPUT ..\report_images\sigmoid.png
 INPUT C:\Users\Admin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx10.tfm
-INPUT C:\Users\Admin\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1000.tfm
 INPUT ..\report_images\baseline_smoothing.png
 INPUT ..\report_images\baseline_smoothing.png
 INPUT ..\report_images\baseline_smoothing.png
@@ -153,6 +152,13 @@ INPUT ..\report_images\baseline_smoothing.png
 INPUT ..\report_images\baseline_smoothing.png
 INPUT ..\report_images\baseline_smoothing.png
 INPUT ..\report_images\baseline_smoothing.png
+INPUT ..\report_images\linear_smoothing.png
+INPUT ..\report_images\linear_smoothing.png
+INPUT ..\report_images\linear_smoothing.png
+INPUT ..\report_images\linear_smoothing.png
+INPUT ..\report_images\linear_smoothing.png
+INPUT ..\report_images\linear_smoothing.png
+INPUT ..\report_images\linear_smoothing.png
 INPUT ..\report_images\aggressive_smoothing.png
 INPUT ..\report_images\aggressive_smoothing.png
 INPUT ..\report_images\aggressive_smoothing.png
@@ -169,8 +175,6 @@ INPUT ..\report_images\tempered_smoothing.png
 INPUT ..\report_images\tempered_smoothing.png
 INPUT C:\Users\Admin\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti10.tfm
 INPUT Report.aux
-INPUT C:\Users\Admin\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk
-INPUT C:\Users\Admin\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk
 INPUT C:\Users\Admin\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx10.pfb
 INPUT C:\Users\Admin\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx10.pfb
 INPUT C:\Users\Admin\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
