@@ -107,9 +107,9 @@ class Custom(PDE):
   def __init__(self, img_path, timestep, iterations):
     super().__init__(img_path, timestep, iterations)
     self.E = 1
-    self.lambda_const = 100
-    self.beta_const = 10.3
-    self.c_const = 20
+    self.lambda_const = 87
+    self.beta_const = 20
+    self.c_const = 43
 
   def gradient(self, Ix, Iy, power):
     Ix_squared = np.power(Ix, 2)

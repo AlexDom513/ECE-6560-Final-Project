@@ -209,7 +209,7 @@
   The corrputed image appears to differ in the range of 10 to 75.
   Let's shape the energy functional so that pixels in the image that
   fall in this range of gradients are smoothed. Thus, we
-  can propose the following penalty
+  can propose the following form for the penalty
   \begin{center}
     Sigmoidal Penalty: $\frac{\lambda}{1+e^{-x}}$\\
     \vspace{12pt}
@@ -635,7 +635,55 @@
   % Experiment
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
-  \section{Experiment}
+  \section{Experiments}
+  Due to the number of different hyperparemeters, we will conduct
+  several iterations of testing to characterize how the custom PDE functions.
+  Additionally, we will include two other PDEs for comparison,
+  the Linear Heat equation and TV Diffusion.
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Test Descriptions
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \subsection{Test Descriptions}
+  Recall the work in section (2), for the custom PDE, we want to adjust
+  the smoothing so that magnitude gradients in the range 10 to 75 are most affected.
+
+  \begin{enumerate}
+    \item Baseline Smoothing
+      \begin{itemize}
+        \item Custom PDE follows linear penalty in the range 10 to 75
+      \end{itemize}
+      \includegraphics[scale=0.1]{../report_images/baseline_smoothing.png}
+
+    \item Aggresive Smoothing
+      \begin{itemize}
+        \item Custom PDE slope greater than linear penalty for portion of range 10 to 75
+      \end{itemize}
+      \includegraphics[scale=0.1]{../report_images/aggressive_smoothing.png}
+
+    \item Tempered Smoothing
+      \begin{itemize}
+        \item First item
+      \end{itemize}
+      \includegraphics[scale=0.1]{../report_images/tempered_smoothing.png}
+
+  \end{enumerate}
+
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Parameters
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \subsection{Parameters}
+    \begin{table}[h]
+      \begin{tabular}{|l|l|l|l|l}
+      \cline{1-4}
+      Test Number & Linear Heat & TV Diffusion & Sigmoidal &  \\ \cline{1-4}
+      1           & $\Delta t = 0.05 $      & $\Delta t =$, $\epsilon =$     & $\Delta t =$, $\epsilon =$, $\lambda = 87$,  $\beta = 20$, $c= 43$ &  \\ \cline{1-4}
+      2           & $\Delta t = 0.05 $      & $\Delta t =$, $\epsilon =$     & $\Delta t =$, $\epsilon =$, $\lambda = 90$,  $\beta = 4$,~  $c= 43$ &  \\ \cline{1-4}
+      3           & $\Delta t = 0.05 $      & $\Delta t =$, $\epsilon =$     & $\Delta t =$, $\epsilon =$, $\lambda = 50$,  $\beta = 27$, $c= 46$ &  \\ \cline{1-4}
+      \end{tabular}
+    \end{table}
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Procedure
