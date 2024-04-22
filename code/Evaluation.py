@@ -131,14 +131,14 @@ class Custom(PDE):
     e_alpha = self.e_alpha(beta,Ix_input,Iy_input,c)
     gradient_1 = self.gradient(Ix_input,Iy_input,-.5)
     gradient_2 = self.gradient(Ix_input,Iy_input,-1.5)
-    return (k/beta) * ( Ixx_input*gradient_1 - Ix_input*gradient_2 * (Ix_input*Ixx_input + Iy_input*Ixy_input) * ( e_alpha / ((1+e_alpha)**2) ) +
+    return (k/beta) * ( (Ixx_input*gradient_1 - Ix_input*gradient_2 * (Ix_input*Ixx_input + Iy_input*Ixy_input)) * ( e_alpha / ((1+e_alpha)**2) ) +
                         Ix_input*gradient_1 * (-1/beta) * e_alpha * gradient_1 * (Ix_input*Ixx_input + Iy_input*Ixy_input) * ( ((1+e_alpha)**-2) + e_alpha * (-2) * ((1+e_alpha)**-3) ))
 
   def dDy_LIy(self, k, beta, c, Ix_input, Iy_input, Iyy_input, Ixy_input):
     e_alpha = self.e_alpha(beta,Ix_input,Iy_input,c)
     gradient_1 = self.gradient(Ix_input,Iy_input,-.5)
     gradient_2 = self.gradient(Ix_input,Iy_input,-1.5)
-    return (k/beta) * ( Iyy_input*gradient_1 - Iy_input*gradient_2 * (Ix_input*Ixy_input + Iy_input*Iyy_input) * ( e_alpha / ((1+e_alpha)**2) ) +
+    return (k/beta) * ( (Iyy_input*gradient_1 - Iy_input*gradient_2 * (Ix_input*Ixy_input + Iy_input*Iyy_input)) * ( e_alpha / ((1+e_alpha)**2) ) +
                         Iy_input*gradient_1 * (-1/beta) * e_alpha * gradient_1 * (Ix_input*Ixy_input + Iy_input*Iyy_input) * ( ((1+e_alpha)**-2) + e_alpha * (-2) * ((1+e_alpha)**-3) ))
 
   def run(self):
@@ -166,7 +166,7 @@ if __name__ == "__main__":
   # shared parameters
   img_path = './images/boats.bmp'
   timestep = .01
-  iterations = 200
+  iterations = 300
 
   # prompt user
   print('Test 1 - Baseline Smoothing')

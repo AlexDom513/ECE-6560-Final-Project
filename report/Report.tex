@@ -37,8 +37,6 @@
   will be able to outperform a more generalized PDE-based filter. Our filter will be developed
   using techniques falling under Anisotropic Diffusion.
 
-
-
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Mathematical Modeling
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -179,8 +177,8 @@
   \end{figure}
 
   \noindent
-  We can compute the magnitude gradient at each pixel in the image using the following
-  approximations that are derived in section (4):
+  We can compute the magnitude gradient at each pixel in the images by using the following
+  approximations. Note that, these are explained in further detail in section (4):
   \begin{center}
     \begin{tabular}{l}
       \vspace{12pt}
@@ -212,7 +210,7 @@
   fall in this range of gradients are smoothed. Thus, we
   can propose the following form for the penalty
   \begin{center}
-    Sigmoidal Penalty: $\frac{\lambda}{1+e^{-x}}$\\
+    Sigmoidal Penalty: $\frac{\lambda}{1+e^{-(x-c)}}$\\
     \vspace{12pt}
     \includegraphics[scale=0.5]{../report_images/sigmoid.png}
   \end{center}
@@ -221,7 +219,7 @@
   \noindent
   The goal of this penalty is to only have smoothing at the gradients
   that are corrputing the image. By keeping a nearly flat penalty in the for
-  the higher gradient, we will greatly reduce the amount of diffusion that
+  the higher gradients, we will greatly reduce the amount of diffusion that
   takes place along the edges.
 
 
@@ -255,7 +253,7 @@
     We will now have to compute terms $L_{I}$, $L_{I_{x}}$, $L_{I_{y}}$ using the previously obtained energy functional
       \begin{center}
         \begin{tabular}{l}
-          $L(I,I_{x},I_{y},x,y) = \frac{\lambda}{1+e^{\alpha}}$, where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|)$\\
+          $L(I,I_{x},I_{y},x,y) = \frac{\lambda}{1+e^{\alpha}}$, where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|-c)$\\
           We will also include a term $\epsilon$ such that $\| \nabla_{I} \| = \sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}$\\
           $\epsilon$ is a constant used to prevent stability issues and will be examined more\\
           \vspace{12pt}
@@ -285,7 +283,7 @@
         $\frac{\partial}{\partial x}(\gamma)\phi$\\
         \vspace{12pt}
         $\frac{\partial}{\partial x}(\frac{I_{x}}{\sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}})\phi$\\
-        $(\frac{I_{xx}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}} + \frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}(I_{x}I_{xx} + I_{y}I_{xy}))\phi$
+        $(\frac{I_{xx}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}} - \frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}(I_{x}I_{xx} + I_{y}I_{xy}))\phi$
       \end{tabular}
     \end{center}
     \vspace{12pt}
@@ -335,7 +333,7 @@
       \vspace{12pt}
       $\frac{\partial}{\partial x}L_{I_{x}} =$\\
       \vspace{12pt}
-      $\frac{\lambda}{\beta}[ (\frac{I_{xx}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xx} + I_{y}I_{xy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+      $\frac{\lambda}{\beta}[[ (\frac{I_{xx}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xx} + I_{y}I_{xy})] (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
       \vspace{12pt}
       $(\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$
     \end{tabular}
@@ -349,7 +347,7 @@
         \vspace{12pt}
         $\frac{\partial}{\partial y}L_{I_{y}} =$\\
         \vspace{12pt}
-        $\frac{\lambda}{\beta}[ (\frac{I_{yy}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xy} + I_{y}I_{yy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+        $\frac{\lambda}{\beta}[[ (\frac{I_{yy}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xy} + I_{y}I_{yy})] (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
         \vspace{12pt}
         $(\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xy}+I_{y}I_{yy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$
       \end{tabular}
@@ -362,11 +360,11 @@
     \begin{center}
       \begin{tabular}{l}
         \vspace{12pt}
-        $I_{t} = \frac{\lambda}{\beta}[ (\frac{I_{xx}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xx} + I_{y}I_{xy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+        $I_{t} = \frac{\lambda}{\beta}[[ (\frac{I_{xx}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xx} + I_{y}I_{xy})] (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
         \vspace{12pt}
         $(\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]+ $\\
         \vspace{12pt}
-        $(\frac{I_{yy}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xy} + I_{y}I_{yy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+        $[(\frac{I_{yy}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xy} + I_{y}I_{yy})] (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
         \vspace{12pt}
         $(\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xy}+I_{y}I_{yy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$
         \vspace{12pt}
@@ -374,7 +372,7 @@
     \end{center}
 
     \noindent
-    Where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|)$ and $\| \nabla_{I} \| = \sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}$\\
+    Where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|-c)$ and $\| \nabla_{I} \| = \sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}$\\
 
 
 
@@ -571,7 +569,7 @@
   \textbf{PDE}\\
   \begin{tabular}{l}
     \vspace{12pt}
-    $I_{t} = \frac{\lambda}{\beta}[ (\frac{I_{xx}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xx} + I_{y}I_{xy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+    $I_{t} = \frac{\lambda}{\beta}[[ (\frac{I_{xx}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xx} + I_{y}I_{xy})] (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
     \vspace{12pt}
     $(\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]+ $\\
     \vspace{12pt}
@@ -579,7 +577,7 @@
     \vspace{12pt}
     $(\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xy}+I_{y}I_{yy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$\\
     \vspace{12pt}
-    Where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|)$ and $\| \nabla_{I} \| = \sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}$\\
+    Where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|-c)$ and $\| \nabla_{I} \| = \sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}$\\
   \end{tabular}
   \vspace{12pt}
 
@@ -872,7 +870,7 @@
   The experiments showed that we were able to successfully
   denoise images using the custom PDE. From a qualitative
   perspective, the best smoothing result for the custom PDE
-  has noticeably less blurring than the result obtained smoothing via
+  has noticeably less blurring than the result obtained from smoothing via
   the Linear Heat equation. From a quantitative perspective, the
   collected data shows that the custom PDE was not able to
   significantly outperform the other methods.\\
@@ -881,14 +879,14 @@
   Despite not directly outperforming the other PDEs, the experiments did highlight some
   other potential advantages of the custom PDE.
   In all tests, the TV diffusion PDE and the custom PDE had equivalent values set for
-  $\delta t$ and $\epsilon$. Furthermore, in test 1, parameters $\lambda = 1$, $\beta=1$,
+  $\Delta t$ and $\epsilon$. Furthermore, in test 1, parameters $\lambda = 1$, $\beta=1$,
   and $c=0$ giving a penalty corresponding to a standard sigmoid function. The custom
   PDE was able to reach its minimum in far fewer iterations than the TV diffusion PDE.
   Although the current implementation of the custom PDE update is more computationally
-  intensive than that of the TV diffusion PDE, each iteration saved is worth 10,000
-  pixels to compute in the 100x100 test image. Depending on the specific
+  intensive than that of the TV diffusion PDE, for the 100x100 test image,
+  each iteration saved is worth 10,000 pixels that do not need to be updated. Depending on the specific
   application, it may be advantageous to design a PDE in a certain way
-  that accounts for both smoothing performance and computational performance.\\
+  that considers both smoothing and computational performance.\\
 
   \noindent
   One challenge that arose while working with the custom PDE was deciding
@@ -897,22 +895,23 @@
   heuristically in order to examine how the varying forms of the
   penalty function can impact smoothing performance. In the future,
   an option to sweep various parameters and observe the impact
-  on a greater array of quality metrics could potentially improve the performance
+  on a greater array of quality metrics could potentially lead to
+  a selection of parameters that improve the performance
   of the PDE.\\
 
   \noindent
   Overall, this project showcased the powerful role PDEs can
   play in image processing. Previously, my perspective was limited
-  to the idea that image smoothing is conducted via convolution with
+  to the idea that image smoothing is simply conducted via convolution
   and that the smoothing can only be paid for by accepting
-  blurring to an image. Instead, smoothing can be thought of 
+  blurring to the image. Instead, smoothing can be thought of 
   as an iterative diffusion process. The designer of the
   PDE is able to control how the smoothing effect will
-  flow between the different pixels in the image.
+  behave in different regions of an image.
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  % Bibliography
+  % References
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
   \urlstyle{same}
