@@ -24,7 +24,7 @@
   Noise can render further processing ineffective, thus there exist a variety of approaches by which
   we can attempt to smooth and denoise images. More traditional denoising techniques
   may involve fixed convolutional kernels, eg. box blur, that indicate how a specific pixel
-  can be updated as a weighted sum of its neighbors. Approaches of this nature will reduce the noise in
+  can be updated as a weighted sum of its neighbors. Approaches of this nature can reduce the noise in
   exchange for the image appearing blurred.\\
 
   \noindent
@@ -48,7 +48,7 @@
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \subsection{Introduction}
   Before explicitly developing our PDE, we must first understand the behavior that we want our system to have.
-  We will leverage the Calculus of Variations. This is a powerful framework that will help arrive at a PDE
+  We will leverage the Calculus of Variations. This is a powerful framework that will help us arrive at a PDE
   that reflects some desired behavior. Examine the following equation
   \begin{center}
     \begin{tabular}{l}
@@ -67,7 +67,7 @@
 
   \noindent
   During lecture, the following example was introduced. If we want to measure how noisy a certain image is,
-  we could measure the average value of the image's gradient squared.
+  we could measure the average value of the image's magnitude gradient squared.
   \begin{center}
     \begin{tabular}{l}
       $E(I) = \int_{0}^{1} \int_{0}^{1} \frac{1}{2} (\| \nabla_{I} \|)^{2} dx$
@@ -126,7 +126,7 @@
     $E(I) = \iint C(\| \nabla_{I} \|) dx dy$
   \end{center}
   Note that the penalty $C(\| \nabla_{I} \|)$
-  must be strictly increasing for the diffusion to be well-posed. We can then
+  must be strictly increasing for the diffusion to be well-posed. We can
   arrive at our PDE via gradient descent\\
 
   \begin{center}
@@ -154,7 +154,7 @@
 
   \noindent
   Now we will work to develop a custom penalty $C(\| \nabla_{I}\|)$ that supports
-  enhanced edge preservation for specific images.
+  enhanced edge preservation for a specific image.
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Image Profiling
@@ -233,6 +233,7 @@
     \noindent Now, recall the Euler-Lagrange equation
       \begin{center}
         \begin{tabular}{l}
+          \vspace{12pt}
           $L_{f} - \frac{\partial}{\partial x}L_{f'} = 0$ (1-D)\\
           $L_{I} - \frac{\partial}{\partial x}L_{I_{x}} - \frac{\partial}{\partial y}L_{I_{y}} = 0$ (2-D)\\
         \end{tabular}
@@ -243,6 +244,7 @@
     We can begin working towards obtaining our PDE by setting up a gradient descent
       \begin{center}
         \begin{tabular}{l}
+          \vspace{12pt}
           $I_{t} = -\nabla_{I}E$\\
           $I_{t} = -L_{I} + \frac{\partial}{\partial x}L_{I_{x}} + \frac{\partial}{\partial y}L_{I_{y}}$
         \end{tabular}
@@ -374,6 +376,48 @@
     \noindent
     Where $\alpha = -\frac{1}{\beta}(\| \nabla_{I} \|-c)$ and $\| \nabla_{I} \| = \sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}$\\
 
+    \newpage
+    \noindent
+    \vspace{12pt}
+    \textbf{Supplemental PDE Derivations}\\
+    \noindent
+    The experiment utilizes the Linear Heat and TV Diffusion PDEs for comparisons with the custom PDE.
+    Brief derivations will be shown here.\\
+
+    \noindent
+    \begin{center}
+      \begin{tabular}{l}
+        \vspace{12pt}
+        \textbf{Linear Heat Equation}\\
+        \vspace{12pt}
+        $L(I,I_{x},I_{y},x,y) = \frac{1}{2} (\| \nabla_{I} \|)^{2}$\\
+        \vspace{12pt}
+        $L_{I} = 0$\\
+        \vspace{12pt}
+        $L_{I_{x}} = I_{x}$\\
+        \vspace{12pt}
+        $L_{I_{y}} = I_{y}$\\
+        \vspace{12pt}
+        $I_{t} = -L_{I} + \frac{\partial}{\partial x}L_{I_{x}} + \frac{\partial}{\partial y}L_{I_{y}}$\\
+        \vspace{24pt}
+        $I_{t} = I_{xx} + I_{yy}$\\
+        \vspace{12pt}
+        \textbf{TV Diffusion}\\
+        \vspace{12pt}
+        $L(I,I_{x},I_{y},x,y) = \| \nabla_{I} \|$\\
+        \vspace{12pt}
+        $L_{I} = 0$\\
+        \vspace{12pt}
+        $L_{I_{x}} = \frac{I_{x}}{\sqrt{I_{x}^2 + I_{y}^2+ \epsilon^2}}$\\
+        \vspace{12pt}
+        $L_{I_{y}} = \frac{I_{y}}{\sqrt{I_{x}^2 + I_{y}^2+ \epsilon^2}}$\\
+        \vspace{12pt}
+        $I_{t} = -L_{I} + \frac{\partial}{\partial x}L_{I_{x}} + \frac{\partial}{\partial y}L_{I_{y}}$\\
+        \vspace{12pt}
+        $I_{t} = \frac{ I_{xx} I_{y}^2 - 2I_{x}I_{y}I_{xy} + I_{yy} I_{x}^2 + \epsilon^2(I_{xx} + I_{yy})} {(I_{x}^2 + I_{y}^2 + \epsilon^2)^{3/2}}$
+      \end{tabular}
+    \end{center}
+
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -436,7 +480,7 @@
   $I_{x}$. A forward difference would introduce some bias because the value of $I_{x}$ at
   a certain point is dependent on an adjacent image value in the positive x-direction only.
   The central difference will balance out the value of $I_{x}$ since both directions
-  are considered. The intent is to make the approximation more robust to variations in image content. \\
+  are considered. The intent is to make the approximation more robust to variations in image content.\\
 
   \newpage
   \noindent
