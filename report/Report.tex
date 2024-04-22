@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage{xurl}
 \title{\textbf{ECE 6560 Final Project - Image Smoothing}}
 \author{Alexander Domagala}
 \date{Spring 2024}
@@ -22,7 +23,7 @@
   All these applications can be affected by a very common problem: image noise.
   Noise can render further processing ineffective, thus there exist a variety of approaches by which
   we can attempt to smooth and denoise images. More traditional denoising techniques
-  may involve fixed convolutional kernels, eg. box blur \cite{Convolution}, that indicate how a specific pixel
+  may involve fixed convolutional kernels, eg. box blur, that indicate how a specific pixel
   can be updated as a weighted sum of its neighbors. Approaches of this nature will reduce the noise in
   exchange for the image appearing blurred.\\
 
@@ -601,22 +602,12 @@
   \end{tabular}
   \vspace{12pt}
 
-  \newpage
   \noindent
   \vspace{12pt}
   \textbf{CFL Condition}\\
   \begin{tabular}{l}
     \vspace{12pt}
     $\Delta t \leq \frac{1}{4} \frac{\beta \epsilon}{\lambda} \Delta x^2$\\
-  \end{tabular}
-  \vspace{12pt}
-
-  \noindent
-  \vspace{12pt}
-  \textbf{Parameters}\\
-  \begin{tabular}{l}
-    \vspace{12pt}
-    $\Delta t, \Delta x, \Delta y, \beta, \epsilon, \lambda $\\
   \end{tabular}
   \vspace{12pt}
 
@@ -924,12 +915,12 @@
   % Bibliography
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
-  \begin{thebibliography}{unsrt}
-    \bibitem{Thomas_book}
-      Thomas, L. \& Ari, R. d. \emph{Biological Feedback} (CRC Press, USA, 1990).
-    \bibitem{Convolution}
-      %https://web.archive.org/web/20060718054020/http://www.acm.uiuc.edu/siggraph/workshops/wjarosz_convolution_2001.pdf
-      Thomas, L. \& Ari, R. d. \emph{Biological Feedback} (CRC Press, USA, 1990).
-  \end{thebibliography}
+  \urlstyle{same}
+  \section{References}
+  \begin{enumerate}
+    \item \url{https://web.archive.org/web/20060718054020/http://www.acm.uiuc.edu/siggraph/workshops/wjarosz_convolution_2001.pdf}
+    \item \url{https://www.mia.uni-saarland.de/weickert/Papers/book.pdf}
+    \item \url{https://www.uni-muenster.de/Physik.TP/archive/fileadmin/lehre/part2_hypebolic/node7.html}
+  \end{enumerate}
 
 \end{document}
