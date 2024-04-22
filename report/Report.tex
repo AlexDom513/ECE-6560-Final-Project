@@ -708,10 +708,27 @@
   compared to the linear penalty, however the result still shows acceptable
   edge preservation characteristics.
   \begin{center}
-    \includegraphics[scale=0.4]{../generated_images/MSE_test1.png}\\
+    \includegraphics[scale=.5]{../generated_images/MSE_test1.png}\\
   \end{center}
   \begin{center}
-    \includegraphics[scale=0.5]{../generated_images/Custom_test1.png}\\
+    \begin{figure}[!htb]
+      \begin{center}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{../report_images/boat_plot.png}
+          \caption{Original Image}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{../report_images/noisy_boat_plot.png}
+          \caption{Corrputed Image}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{../generated_images/Custom_test1.png}
+          \caption{Smoothed Image}
+        \end{subfigure}
+      \end{center}
+    \end{figure}
   \end{center}
 
   %%%%%%%%%%%%%
@@ -734,7 +751,24 @@
     \includegraphics[scale=0.5]{../generated_images/MSE_test2.png}\\
   \end{center}
   \begin{center}
-    \includegraphics[scale=0.5]{../generated_images/Custom_test2.png}\\
+    \begin{figure}[!htb]
+      \begin{center}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{../report_images/boat_plot.png}
+          \caption{Original Image}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{../report_images/noisy_boat_plot.png}
+          \caption{Corrputed Image}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{../generated_images/Custom_test2.png}
+          \caption{Smoothed Image}
+        \end{subfigure}
+      \end{center}
+    \end{figure}
   \end{center}
 
   %%%%%%%%%%%%%
@@ -755,7 +789,24 @@
     \includegraphics[scale=0.5]{../generated_images/MSE_test3.png}\\
   \end{center}
   \begin{center}
-    \includegraphics[scale=0.5]{../generated_images/Custom_test3.png}\\
+    \begin{figure}[!htb]
+      \begin{center}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{../report_images/boat_plot.png}
+          \caption{Original Image}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{../report_images/noisy_boat_plot.png}
+          \caption{Corrputed Image}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{../generated_images/Custom_test3.png}
+          \caption{Smoothed Image}
+        \end{subfigure}
+      \end{center}
+    \end{figure}
   \end{center}
 
   %%%%%%%%%%%%%
@@ -776,14 +827,33 @@
     \includegraphics[scale=0.5]{../generated_images/MSE_test4.png}\\
   \end{center}
   \begin{center}
-    \includegraphics[scale=0.5]{../generated_images/Custom_test4.png}\\
+    \begin{figure}[!htb]
+      \begin{center}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{../report_images/boat_plot.png}
+          \caption{Original Image}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{../report_images/noisy_boat_plot.png}
+          \caption{Corrputed Image}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{../generated_images/Custom_test4.png}
+          \caption{Smoothed Image}
+        \end{subfigure}
+      \end{center}
+    \end{figure}
   \end{center}
 
   %%%%%%%%%%%%%
   % MSE Table
   %%%%%%%%%%%%%
   \newpage
-  \begin{table}[]
+  \noindent
+  \textbf{Minimum Computed MSE}
+  \begin{table}[h]
     \begin{tabular}{|l|l|ll|lllll|}
     \hline
     Test Number & Linear Heat MSE & \multicolumn{2}{l|}{TV Diffusion MSE} & \multicolumn{5}{l|}{Sigmoidal MSE}  \\ \hline
@@ -794,6 +864,12 @@
     \end{tabular}
     \end{table}
 
+  \vspace{12 pt}
+  \noindent \textbf{Test 4 - Best smoothing result:}
+  \begin{center}
+    \includegraphics[width=\textwidth]{../generated_images/Custom_test4.png}
+  \end{center}
+
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Conclusion
@@ -801,7 +877,53 @@
   \newpage
   \section{Conclusion}
 
+  \noindent
+  The experiments showed that we were able to successfully
+  denoise images using the custom PDE. From a qualitative
+  perspective, the best smoothing result for the custom PDE
+  has noticeably less blurring than the result obtained smoothing via
+  the Linear Heat equation. From a quantitative perspective, the
+  collected data shows that the custom PDE was not able to
+  significantly outperform the other methods.\\
 
+  \noindent
+  Despite not directly outperforming the other PDEs, the experiments did highlight some
+  other potential advantages of the custom PDE.
+  In all tests, the TV diffusion PDE and the custom PDE had equivalent values set for
+  $\delta t$ and $\epsilon$. Furthermore, in test 1, parameters $\lambda = 1$, $\beta=1$,
+  and $c=0$ giving a penalty corresponding to a standard sigmoid function. The custom
+  PDE was able to reach its minimum in far fewer iterations than the TV diffusion PDE.
+  Although the current implementation of the custom PDE update is more computationally
+  intensive than that of the TV diffusion PDE, each iteration saved is worth 10,000
+  pixels to compute in the 100x100 test image. Depending on the specific
+  application, it may be advantageous to design a PDE in a certain way
+  that accounts for both smoothing performance and computational performance.\\
+
+  \noindent
+  One challenge that arose while working with the custom PDE was deciding
+  how to balance the various parameters including $\lambda$, $\beta$,
+  $c$, etc. The selection of values for the parameters was performed
+  heuristically in order to examine how the varying forms of the
+  penalty function can impact smoothing performance. In the future,
+  an option to sweep various parameters and observe the impact
+  on a greater array of quality metrics could potentially improve the performance
+  of the PDE.\\
+
+  \noindent
+  Overall, this project showcased the powerful role PDEs can
+  play in image processing. Previously, my perspective was limited
+  to the idea that image smoothing is conducted via convolution with
+  and that the smoothing can only be paid for by accepting
+  blurring to an image. Instead, smoothing can be thought of 
+  as an iterative diffusion process. The designer of the
+  PDE is able to control how the smoothing effect will
+  flow between the different pixels in the image.
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Bibliography
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \newpage
   \begin{thebibliography}{unsrt}
     \bibitem{Thomas_book}
       Thomas, L. \& Ari, R. d. \emph{Biological Feedback} (CRC Press, USA, 1990).
