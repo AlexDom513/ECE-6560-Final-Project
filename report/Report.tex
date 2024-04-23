@@ -37,6 +37,9 @@
   will be able to outperform a more generalized PDE-based filter. Our filter will be developed
   using techniques falling under Anisotropic Diffusion.
 
+
+
+
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Mathematical Modeling
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -221,6 +224,7 @@
   that are corrputing the image. By keeping a nearly flat penalty in the for
   the higher gradients, we will greatly reduce the amount of diffusion that
   takes place along the edges.
+
 
 
 
@@ -420,6 +424,7 @@
 
 
 
+
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Discretization and Implementation
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -452,8 +457,10 @@
   \end{center}
 
   \noindent
-  After eliminating $f(x,t)$ terms on the right side of the above equations,
-  we obtain our approximation. Note that the approximation includes an error term $O(\Delta t)$.
+  $f(x,t)$ can be elimnated on the right side of the equation by subtracting the 
+  first equation from the second. This introduces $-f(x,t)$ on the left hand side.
+  Finally, we can divide by $\Delta t$.
+  Note that the approximation also includes an error term $O(\Delta t)$.
   \begin{center}
     \begin{tabular}{l}
       $f'(x,t) = \frac{f(x,t+\Delta t) - f(x,t)}{\Delta t}$\\
@@ -488,8 +495,6 @@
   numeric differentiation method shown in lecture
   \begin{center}
     \begin{tabular}{l}
-      \vspace{12pt}
-      $f(x,t) = f(x,t)$\\
       \vspace{12pt}
       $f(x+\Delta x,t) = f(x,t) + \Delta x f'(x,t) + O(\Delta x^2)$\\
       \vspace{12pt}
@@ -563,11 +568,31 @@
   we defined $I_{t}(x,y,t) = \frac{I(x,y,t+\Delta t) - I(x,y,t)}{\Delta t}$. In our implementation,
   $\Delta t$ will multiply the right side of the PDE. The product will then be added to
   the current image to obtain the updated image. Thus, we must find a CFL condition
-  so that we can find an appropriate time-step. Recall that during the derivation of
+  so that we can ensure numeric stability.\\
+
+  \noindent
+  Typically, a CFL condition can be found by performing Von Neumann Analysis on a finite
+  difference equation. Due to the complexity of the derived PDE, Von Neumann Analysis
+  is not feasible.\\
+
+  \noindent
+  Instead, we can attempt to analyze for what value of $\| \nabla_{I} \|$ is $\frac {\dot{C}(\| \nabla_{I} \|)}{\| \nabla_{I} \|}$ 
+  maximized. At this point, we will obtain the strictest CFL condition. Recall that
+  the penalty function $C(\| \nabla_{I} \|)$ had the form $\frac{\lambda}{1+e^{-\frac{1}{\beta}(\| \nabla_{I} \|-c)}}$.
+  Taking the derivative with respect to $\| \nabla_{I} \|$ and multiplying by $\frac{1}{\| \nabla_{I}\|}$ yields
+  \begin{center}
+    $\frac{\lambda e^{-\frac{1}{\beta}(\| \nabla_{I} \|-c)}}{\beta(1+e^{-\frac{1}{\beta}(\| \nabla_{I} \|-c)})^2} \frac{1}{\| \nabla_{I} \|}$
+  \end{center}
+  Graphing the expression as a function of $\| \nabla_{I} \|$ reveals that as $\| \nabla_{I} \|$
+  approaches zero, the value of $\frac {\dot{C}(\| \nabla_{I} \|)}{\| \nabla_{I} \|}$
+  tends towards its maximum of infinity.\\
+  
+  \noindent
+  Now, recall that during the derivation of
   the PDE, a term $\epsilon$ was included so that $\| \nabla_{I} \| = \sqrt{I_{x}^2 + I_{y}^2 + \epsilon^2}$.
-  Suppose the gradient became very small, all terms $I_{x}$ and $I_{y}$ in the PDE would go to zero and 
+  Suppose the gradient became very small. All terms $I_{x}$ and $I_{y}$ in the PDE would go to zero and 
   we would be left with $I_{t} = \frac{\lambda}{\beta}[(\frac{I_{xx}+I_{yy}}{(\epsilon^2)^\frac{1}{2}})]$.
-  Then we simply have the heat equation
+  Then we simply have a scaled version of the heat equation
   \begin{center}
     \begin{tabular}{l}
       $I_{t} = \frac{\lambda}{\beta \epsilon}\Delta I$
@@ -575,16 +600,24 @@
   \end{center}
 
   \noindent
-  We can include our constants with the form of the CFL condition for the two-dimensional linear heat equation
-  as shown in lecture
+  In lecture, it was shown that the linear heat equation has a CFL condition
+  \begin{center}
+    \begin{tabular}{l}
+      $\Delta t \leq \frac{1}{4} \Delta x^2$
+    \end{tabular}
+  \end{center}
+
+  \noindent
+  Thus, we can include our constants to obtain a new CFL condition
   \begin{center}
     \begin{tabular}{l}
       \vspace{12pt}
-      $\frac{\lambda}{\beta \epsilon} \leq \frac{1}{4} \Delta x^2$\\
+      $\frac{\lambda}{\beta \epsilon} \Delta t \leq \frac{1}{4} \Delta x^2$\\
       $\Delta t \leq \frac{1}{4} \frac{\beta \epsilon}{\lambda} \Delta x^2$\\
     \end{tabular}
   \end{center}
 
+  \newpage
   \noindent
   With a bound set for  $\Delta t$, we can now shift our focus to $\Delta x$ and $\Delta y$. Since
   a digital image is composed of a finite number of individual pixels, we will compute the different
@@ -598,9 +631,11 @@
       $I_{x}(a,b,t) = \frac{I(a+1,b,t)}{2(1)} - \frac{I(a-1,b,t)}{2(1)}$
     \end{tabular}
   \end{center}
+  \noindent
+  This scheme will be followed for all the spatial derivatives.\\
 
   \noindent
-  Finally, we will iterate through each pixel in the image and compute how the pixel should
+  Finally, we will now be able to iterate through each pixel in the image and compute how the pixel should
   be updated based on the PDE.
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -664,6 +699,7 @@
 
 
 
+
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Experiment
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -682,6 +718,7 @@
   smoothing so that magnitude gradients in the range 10 to 75 are most affected.
   The following table summarizes the different parameters that will be used for
   testing the custom PDE.
+  \begin{center}
     \begin{table}[h]
       \begin{tabular}{|l|l|ll|lllll|}
       \hline
@@ -692,6 +729,7 @@
       4           &  $\Delta t = 0.05 $    & \multicolumn{1}{l|}{$\Delta t = 0.1$} \ $\epsilon = 4$  &    & \multicolumn{1}{l|}{$\Delta t = 0.1$} & \multicolumn{1}{l|}{$\epsilon = 4$} & \multicolumn{1}{l|}{$\lambda = 50$} & \multicolumn{1}{l|}{$\beta = 27$} & $c= 46$ \\ \hline
       \end{tabular}
     \end{table}
+  \end{center}
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Control Results
