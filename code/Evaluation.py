@@ -8,7 +8,8 @@
 # Aggregates the functionality contained in the following notebooks:
 # Linear_Heat.ipynb, TV.ipynb, and Sigmoid.ipynb.
 # Runs the different PDE schemes on the test image and
-# displays the results.
+# displays the results. Note that code at end of script can be
+# uncommented to enable saving of figures and data.
 ######################################################################
 
 from PIL import Image
@@ -288,46 +289,46 @@ if __name__ == "__main__":
   plt.plot(tv.MSE_arr, label='Linear Penalty')
   plt.plot(custom.MSE_arr, label='Sigmoidal Penalty')
   plt.legend()
-  file_name = 'MSE_test' + str(test_num) + '.png'
-  save_path = os.path.join(curr_dir,folder_name)
-  save_path = os.path.join(save_path,file_name)
-  plt.savefig(save_path)
+  # file_name = 'MSE_test' + str(test_num) + '.png'
+  # save_path = os.path.join(curr_dir,folder_name)
+  # save_path = os.path.join(save_path,file_name)
+  # plt.savefig(save_path)
   plt.show()
 
   # obtain images with lowest MSE and save
   plt.title('Linear Heat')
   plt.imshow(linerHeat.I_min_MSE, cmap='gray')
   print('Linear Heat minimum MSE: ' + str(linerHeat.min_MSE))
-  file_name = 'LinearHeat_test' + str(test_num) + '.png'
-  save_path = os.path.join(curr_dir,folder_name)
-  save_path = os.path.join(save_path,file_name)
-  plt.savefig(save_path)
+  # file_name = 'LinearHeat_test' + str(test_num) + '.png'
+  # save_path = os.path.join(curr_dir,folder_name)
+  # save_path = os.path.join(save_path,file_name)
+  # plt.savefig(save_path)
   plt.show()
 
   plt.title('TV')
   plt.imshow(tv.I_min_MSE, cmap='gray')
   print('TV minimum MSE: ' + str(tv.min_MSE))
-  file_name = 'TV_test' + str(test_num) + '.png'
-  save_path = os.path.join(curr_dir,folder_name)
-  save_path = os.path.join(save_path,file_name)
-  plt.savefig(save_path)
+  # file_name = 'TV_test' + str(test_num) + '.png'
+  # save_path = os.path.join(curr_dir,folder_name)
+  # save_path = os.path.join(save_path,file_name)
+  # plt.savefig(save_path)
   plt.show()
 
   plt.title('Custom')
   plt.imshow(custom.I_min_MSE, cmap='gray')
   print('Custom minimum MSE: ' + str(custom.min_MSE))
-  file_name = 'Custom_test' + str(test_num) + '.png'
-  save_path = os.path.join(curr_dir,folder_name)
-  save_path = os.path.join(save_path,file_name)
-  plt.savefig(save_path)
+  # file_name = 'Custom_test' + str(test_num) + '.png'
+  # save_path = os.path.join(curr_dir,folder_name)
+  # save_path = os.path.join(save_path,file_name)
+  # plt.savefig(save_path)
   plt.show()
 
   # write the minimum computed MSE to a file
-  file_name = 'MSE_test' + str(test_num) + 'summary' + '.txt'
-  save_path = os.path.join(curr_dir,folder_name)
-  save_path = os.path.join(save_path,file_name)
-  with open(save_path, 'w') as file:
-    file.write('test' + str(test_num) + ' minimum MSE values:\n')
-    file.write('linear heat: ' + str(linerHeat.min_MSE) + '\n')
-    file.write('tv: ' + str(tv.min_MSE) + '\n')
-    file.write('custom: ' + str(custom.min_MSE) + '\n')
+  # file_name = 'MSE_test' + str(test_num) + 'summary' + '.txt'
+  # save_path = os.path.join(curr_dir,folder_name)
+  # save_path = os.path.join(save_path,file_name)
+  # with open(save_path, 'w') as file:
+  #   file.write('test' + str(test_num) + ' minimum MSE values:\n')
+  #   file.write('linear heat: ' + str(linerHeat.min_MSE) + '\n')
+  #   file.write('tv: ' + str(tv.min_MSE) + '\n')
+  #   file.write('custom: ' + str(custom.min_MSE) + '\n')

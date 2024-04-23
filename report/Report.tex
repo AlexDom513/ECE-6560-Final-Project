@@ -61,7 +61,7 @@
 
   \noindent
   $E(I)$ is the energy functional. Similar to the common understanding of a function, it can output
-  a single value. The key difference is that the input to the energy functional, is another entire
+  a single value. The key difference is that the input to the energy functional is another entire
   function that will depend on traditional variables like $x,y$, etc.\\
 
   \noindent
@@ -70,7 +70,7 @@
 
   \noindent
   During lecture, the following example was introduced. If we want to measure how noisy a certain image is,
-  we could measure the average value of the image's magnitude gradient squared.
+  we can measure the average value of the image's magnitude gradient squared.
   \begin{center}
     \begin{tabular}{l}
       $E(I) = \int_{0}^{1} \int_{0}^{1} \frac{1}{2} (\| \nabla_{I} \|)^{2} dx$
@@ -83,7 +83,7 @@
   that we can utilize the Euler Lagrange equation
   $L_{I} - \frac{\partial}{\partial x}L_{I_{x}} - \frac{\partial}{\partial y}L_{I_{y}} = 0$ to solve an
   optimization problem that minimizes the energy functional $E(I)$. Since we defined the
-  energy functional to measure the average gradient squared, minimization will yield a method
+  energy functional to measure the average magnitude gradient squared, minimization will yield a method
   by which we can most efficiently reduce this criterion.\\
 
   \newpage
@@ -142,10 +142,6 @@
       $L_{I_{x}} = \dot{C}(\| \nabla_{I} \|) \frac{I_{x}}{\| \nabla_{I} \|}$\\
       \vspace{12pt}
       $L_{I_{y}} = \dot{C}(\| \nabla_{I} \|) \frac{I_{y}}{\| \nabla_{I} \|}$\\
-      \vspace{12pt}
-      $\nabla_{I}E = L_{I} - \frac{\partial}{\partial x}L_{I_{x}} - \frac{\partial}{\partial y}L_{I_{y}}$\\
-      \vspace{12pt}
-      $I_{t} = -\nabla_{I}E$\\
       \vspace{12pt}
       $I_{t} = -L_{I} + \frac{\partial}{\partial x}L_{I_{x}} + \frac{\partial}{\partial y}L_{I_{y}}$\\
       \vspace{12pt}
@@ -213,7 +209,7 @@
   fall in this range of gradients are smoothed. Thus, we
   can propose the following form for the penalty
   \begin{center}
-    Sigmoidal Penalty: $\frac{\lambda}{1+e^{-(x-c)}}$\\
+    Sigmoidal Penalty: $\frac{\lambda}{1+e^{-\frac{1}{\beta}(\| \nabla_{I} \|-c)}}$\\
     \vspace{12pt}
     \includegraphics[scale=0.5]{../report_images/sigmoid.png}
   \end{center}
@@ -635,7 +631,7 @@
   This scheme will be followed for all the spatial derivatives.\\
 
   \noindent
-  Finally, we will now be able to iterate through each pixel in the image and compute how the pixel should
+  We will now be able to iterate through each pixel in the image and compute how the pixel should
   be updated based on the PDE.
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -705,7 +701,7 @@
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
   \section{Experiments}
-  Since there are several different hyperparemeters, we will conduct
+  Since there are several different paremeters, we will conduct
   multiple tests to characterize how the custom PDE functions.
   Additionally, we will include two other PDEs for comparison,
   the Linear Heat equation and TV Diffusion.
@@ -772,7 +768,7 @@
   %%%%%%%%%%%%%
   \noindent
   \textbf{1. Baseline Smoothing}\\
-  In this test, the Custom PDE parameters are all set to one or zero to use 
+  In this test, the custom PDE parameters are all set to one or zero to use 
   a penalty associated with a typical sigmoid.\\
   \begin{center}
     \includegraphics[scale=0.2]{../report_images/baseline_smoothing.png}\\
@@ -780,7 +776,7 @@
   \vspace{12pt}
 
   \noindent 
-  In its base configuration, we see that the sigmoidal penalty is able to still
+  In its base configuration, we see that the sigmoidal penalty is still able to
   apply some smoothing to the image. However, the MSE  is dropping much more
   slowly than the MSEs associated with the other penalties.
 
@@ -816,7 +812,7 @@
   \newpage
   \noindent
   \textbf{2. ``Linear'' Smoothing}\\
-  In this test, the Custom PDE parameters are set such that the sigmoidal penalty
+  In this test, the custom PDE parameters are set such that the sigmoidal penalty
   traces the linear penalty before going flat.\\
   \begin{center}
     \includegraphics[scale=0.2]{../report_images/linear_smoothing.png}\\
@@ -1002,8 +998,8 @@
   heuristically in order to examine how the varying forms of the
   penalty function can impact smoothing performance. In the future,
   an option to sweep parameters and observe the impact
-  on a greater array of quality metrics could potentially lead to
-  new combinations of parameters that can improve the smoothing
+  on a greater array of quality metrics could lead to
+  new combinations of parameters that improve the smoothing
   performance of the PDE.\\
 
   \noindent
