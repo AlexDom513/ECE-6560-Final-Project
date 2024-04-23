@@ -3,7 +3,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{subcaption}
-\usepackage{xurl}
+\usepackage{url}
 \title{\textbf{ECE 6560 Final Project - Image Smoothing}}
 \author{Alexander Domagala}
 \date{Spring 2024}
@@ -23,7 +23,7 @@
   All these applications can be affected by a very common problem: image noise.
   Noise can render further processing ineffective, thus there exist a variety of approaches by which
   we can attempt to smooth and denoise images. More traditional denoising techniques
-  may involve fixed convolutional kernels, eg. box blur, that indicate how a specific pixel
+  may involve fixed convolutional kernels, eg. box blur\cite{boxBlur}, that indicate how a specific pixel
   can be updated as a weighted sum of its neighbors. Approaches of this nature can reduce the noise in
   exchange for the image appearing blurred.\\
 
@@ -1021,12 +1021,18 @@
   % References
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \newpage
+  \begin{thebibliography}{999}
   \urlstyle{same}
-  \section{References}
-  \begin{enumerate}
-    \item \url{https://web.archive.org/web/20060718054020/http://www.acm.uiuc.edu/siggraph/workshops/wjarosz_convolution_2001.pdf}
-    \item \url{https://www.mia.uni-saarland.de/weickert/Papers/book.pdf}
-    \item \url{https://www.uni-muenster.de/Physik.TP/archive/fileadmin/lehre/part2_hypebolic/node7.html}
-  \end{enumerate}
+
+  \bibitem{boxBlur}
+    W. Jarosz, ``Fast Image Convolutions'', 2001.
+    \url{https://web.archive.org/web/20060718054020/http://www.acm.uiuc.edu/siggraph/workshops/wjarosz_convolution_2001.pdf}
+  \bibitem{numpy}
+    Harris, C.R., Millman, K.J., van der Walt, S.J. ``Array programming with NumPy'', Nature 585, 357–362 2020.
+  \bibitem{matplotlib}
+    J. D. Hunter, ``Matplotlib: A 2D Graphics Environment'', Computing in Science \& Engineering, vol. 9, no. 3, pp. 90-95, 2007.
+  \bibitem{pillow}
+    Clark A., ``Pillow (PIL Fork) Documentation'', 2015. \url{https://buildmedia.readthedocs.org/media/pdf/pillow/latest/pillow.pdf}
+  \end{thebibliography}
 
 \end{document}
