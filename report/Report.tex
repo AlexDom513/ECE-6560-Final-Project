@@ -717,7 +717,8 @@
   Recall the work in section (2), for the custom PDE, we want to adjust the
   smoothing so that magnitude gradients in the range 10 to 75 are most affected.
   The following table summarizes the different parameters that will be used for
-  testing the custom PDE.
+  testing the custom PDE. All combinations of parameters satisfy the
+  previously derived CFL condition.
   \begin{center}
     \begin{table}[h]
       \begin{tabular}{|l|l|ll|lllll|}
@@ -737,7 +738,7 @@
   \subsection{Control Results}
   In addition to the original and corrupted versions of the images.
   Image results are provided for the Linear Heat Equation and TV Diffusion
-  on the next page.
+  on the following page.
 
   \begin{figure}[!htb]
     \begin{center}
@@ -823,7 +824,7 @@
   \vspace{12pt}
 
   \noindent
-  It is extremely intersting to see how the MSE associated with the
+  It is very interesting to see how the MSE associated with the
   sigmoidal penalty closey follows the MSE of the linear penalty.
   Examining the smoothing result on the next page, we can see that
   we obtained a much better result than the previous test.
@@ -980,22 +981,19 @@
   denoise images using the custom PDE. From a qualitative
   perspective, the best smoothing result for the custom PDE
   has noticeably less blurring than the result obtained from smoothing via
-  the Linear Heat equation. From a quantitative perspective, the
-  collected data shows that the custom PDE was not able to
-  significantly outperform the other methods.\\
+  the Linear Heat equation. From a quantitative perspective, tests 2 and 3
+  showed that the custom PDE was able to outperform TV Diffusion on
+  the MSE metric.\\
 
   \noindent
-  Despite not directly outperforming the other PDEs, the experiments did highlight some
-  other potential advantages of the custom PDE.
-  In all tests, the TV diffusion PDE and the custom PDE had equivalent values set for
-  $\Delta t$ and $\epsilon$. Furthermore, in test 1, parameters $\lambda = 1$, $\beta=1$,
-  and $c=0$ giving a penalty corresponding to a standard sigmoid function. The custom
-  PDE was able to reach its minimum in far fewer iterations than the TV diffusion PDE.
-  Although the current implementation of the custom PDE update is more computationally
-  intensive than that of the TV diffusion PDE, for the 100x100 test image,
-  each iteration saved is worth 10,000 pixels that do not need to be updated. Depending on the specific
-  application, it may be advantageous to design a PDE in a certain way
-  that considers both smoothing and computational performance.\\
+  Although the PDE showed very good smoothing performance, every single
+  test showed that reaching the minimum MSE required
+  more iterations than the other methods. This was expected as
+  the sigmoidal penalty goes nearly flat after a certain point. This
+  causes the reduced rate of smoothing. Furthermore, the coding
+  implementation requires many more operations than the other methods.
+  Thus, the custom PDE might not be suitable for applications that require 
+  the smoothing to take place in a short amount of time.\\
 
   \noindent
   One challenge that arose while working with the custom PDE was deciding
@@ -1003,10 +1001,10 @@
   $c$, etc. The selection of values for the parameters was performed
   heuristically in order to examine how the varying forms of the
   penalty function can impact smoothing performance. In the future,
-  an option to sweep various parameters and observe the impact
+  an option to sweep parameters and observe the impact
   on a greater array of quality metrics could potentially lead to
-  a selection of parameters that improve the performance
-  of the PDE.\\
+  new combinations of parameters that can improve the smoothing
+  performance of the PDE.\\
 
   \noindent
   Overall, this project showcased the powerful role PDEs can

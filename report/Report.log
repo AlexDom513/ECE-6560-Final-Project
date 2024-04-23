@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.3) (preloaded format=pdflatex 2024.3.25)  22 APR 2024 21:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.3) (preloaded format=pdflatex 2024.3.25)  22 APR 2024 21:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -358,169 +358,169 @@ Overfull \hbox (44.99792pt too wide) in paragraph at lines 646--662
  []
 
 [15]
-Overfull \hbox (96.32391pt too wide) in paragraph at lines 723--731
+Overfull \hbox (96.32391pt too wide) in paragraph at lines 724--732
 [][] 
  []
 
 File: ../report_images/boat_crop.png Graphic file (type png)
 <use ../report_images/boat_crop.png>
-Package pdftex.def Info: ../report_images/boat_crop.png  used on input line 745.
+Package pdftex.def Info: ../report_images/boat_crop.png  used on input line 746.
 (pdftex.def)             Requested size: 137.9979pt x 135.10867pt.
 File: ../report_images/noisy.png Graphic file (type png)
 <use ../report_images/noisy.png>
-Package pdftex.def Info: ../report_images/noisy.png  used on input line 750.
+Package pdftex.def Info: ../report_images/noisy.png  used on input line 751.
 (pdftex.def)             Requested size: 137.9979pt x 136.72865pt.
 [16]
 <../generated_images/LinearHeat_test1.png, id=82, 462.528pt x 346.896pt>
 File: ../generated_images/LinearHeat_test1.png Graphic file (type png)
 <use ../generated_images/LinearHeat_test1.png>
-Package pdftex.def Info: ../generated_images/LinearHeat_test1.png  used on input line 758.
+Package pdftex.def Info: ../generated_images/LinearHeat_test1.png  used on input line 759.
 (pdftex.def)             Requested size: 345.0pt x 258.76335pt.
 <../generated_images/TV_test1.png, id=83, 462.528pt x 346.896pt>
 File: ../generated_images/TV_test1.png Graphic file (type png)
 <use ../generated_images/TV_test1.png>
-Package pdftex.def Info: ../generated_images/TV_test1.png  used on input line 759.
+Package pdftex.def Info: ../generated_images/TV_test1.png  used on input line 760.
 (pdftex.def)             Requested size: 345.0pt x 258.76335pt.
  [17 <../generated_images/LinearHeat_test1.png> <../generated_images/TV_test1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 767--768
+Underfull \hbox (badness 10000) in paragraph at lines 768--769
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 772--776
+Underfull \hbox (badness 10000) in paragraph at lines 773--777
 
  []
 
 <../report_images/baseline_smoothing.png, id=89, 803.0pt x 803.0pt>
 File: ../report_images/baseline_smoothing.png Graphic file (type png)
 <use ../report_images/baseline_smoothing.png>
-Package pdftex.def Info: ../report_images/baseline_smoothing.png  used on input line 777.
+Package pdftex.def Info: ../report_images/baseline_smoothing.png  used on input line 778.
 (pdftex.def)             Requested size: 160.59715pt x 160.59715pt.
 <../generated_images/MSE_test1.png, id=90, 462.528pt x 346.896pt>
 File: ../generated_images/MSE_test1.png Graphic file (type png)
 <use ../generated_images/MSE_test1.png>
-Package pdftex.def Info: ../generated_images/MSE_test1.png  used on input line 787.
+Package pdftex.def Info: ../generated_images/MSE_test1.png  used on input line 788.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
 [18 <../report_images/baseline_smoothing.png> <../generated_images/MSE_test1.png>]
 <../report_images/boat_plot.png, id=96, 462.528pt x 346.896pt>
 File: ../report_images/boat_plot.png Graphic file (type png)
 <use ../report_images/boat_plot.png>
-Package pdftex.def Info: ../report_images/boat_plot.png  used on input line 795.
+Package pdftex.def Info: ../report_images/boat_plot.png  used on input line 796.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 <../report_images/noisy_boat_plot.png, id=97, 462.528pt x 346.896pt>
 File: ../report_images/noisy_boat_plot.png Graphic file (type png)
 <use ../report_images/noisy_boat_plot.png>
-Package pdftex.def Info: ../report_images/noisy_boat_plot.png  used on input line 800.
+Package pdftex.def Info: ../report_images/noisy_boat_plot.png  used on input line 801.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 <../generated_images/Custom_test1.png, id=98, 462.528pt x 346.896pt>
 File: ../generated_images/Custom_test1.png Graphic file (type png)
 <use ../generated_images/Custom_test1.png>
-Package pdftex.def Info: ../generated_images/Custom_test1.png  used on input line 805.
+Package pdftex.def Info: ../generated_images/Custom_test1.png  used on input line 806.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
  [19 <../report_images/boat_plot.png> <../report_images/noisy_boat_plot.png> <../generated_images/Custom_test1.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 816--820
+Underfull \hbox (badness 10000) in paragraph at lines 817--821
 
  []
 
 <../report_images/linear_smoothing.png, id=106, 803.0pt x 803.0pt>
 File: ../report_images/linear_smoothing.png Graphic file (type png)
 <use ../report_images/linear_smoothing.png>
-Package pdftex.def Info: ../report_images/linear_smoothing.png  used on input line 821.
+Package pdftex.def Info: ../report_images/linear_smoothing.png  used on input line 822.
 (pdftex.def)             Requested size: 160.59715pt x 160.59715pt.
 <../generated_images/MSE_test2.png, id=107, 462.528pt x 346.896pt>
 File: ../generated_images/MSE_test2.png Graphic file (type png)
 <use ../generated_images/MSE_test2.png>
-Package pdftex.def Info: ../generated_images/MSE_test2.png  used on input line 832.
+Package pdftex.def Info: ../generated_images/MSE_test2.png  used on input line 833.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
 [20 <../report_images/linear_smoothing.png> <../generated_images/MSE_test2.png>]
 File: ../report_images/boat_plot.png Graphic file (type png)
 <use ../report_images/boat_plot.png>
-Package pdftex.def Info: ../report_images/boat_plot.png  used on input line 840.
+Package pdftex.def Info: ../report_images/boat_plot.png  used on input line 841.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 File: ../report_images/noisy_boat_plot.png Graphic file (type png)
 <use ../report_images/noisy_boat_plot.png>
-Package pdftex.def Info: ../report_images/noisy_boat_plot.png  used on input line 845.
+Package pdftex.def Info: ../report_images/noisy_boat_plot.png  used on input line 846.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 <../generated_images/Custom_test2.png, id=113, 462.528pt x 346.896pt>
 File: ../generated_images/Custom_test2.png Graphic file (type png)
 <use ../generated_images/Custom_test2.png>
-Package pdftex.def Info: ../generated_images/Custom_test2.png  used on input line 850.
+Package pdftex.def Info: ../generated_images/Custom_test2.png  used on input line 851.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
  [21 <../generated_images/Custom_test2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 861--868
+Underfull \hbox (badness 10000) in paragraph at lines 862--869
 
  []
 
 <../report_images/aggressive_smoothing.png, id=118, 803.0pt x 803.0pt>
 File: ../report_images/aggressive_smoothing.png Graphic file (type png)
 <use ../report_images/aggressive_smoothing.png>
-Package pdftex.def Info: ../report_images/aggressive_smoothing.png  used on input line 869.
+Package pdftex.def Info: ../report_images/aggressive_smoothing.png  used on input line 870.
 (pdftex.def)             Requested size: 160.59715pt x 160.59715pt.
 <../generated_images/MSE_test3.png, id=119, 462.528pt x 346.896pt>
 File: ../generated_images/MSE_test3.png Graphic file (type png)
 <use ../generated_images/MSE_test3.png>
-Package pdftex.def Info: ../generated_images/MSE_test3.png  used on input line 879.
+Package pdftex.def Info: ../generated_images/MSE_test3.png  used on input line 880.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
 [22 <../report_images/aggressive_smoothing.png> <../generated_images/MSE_test3.png>]
 File: ../report_images/boat_plot.png Graphic file (type png)
 <use ../report_images/boat_plot.png>
-Package pdftex.def Info: ../report_images/boat_plot.png  used on input line 887.
+Package pdftex.def Info: ../report_images/boat_plot.png  used on input line 888.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 File: ../report_images/noisy_boat_plot.png Graphic file (type png)
 <use ../report_images/noisy_boat_plot.png>
-Package pdftex.def Info: ../report_images/noisy_boat_plot.png  used on input line 892.
+Package pdftex.def Info: ../report_images/noisy_boat_plot.png  used on input line 893.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 <../generated_images/Custom_test3.png, id=125, 462.528pt x 346.896pt>
 File: ../generated_images/Custom_test3.png Graphic file (type png)
 <use ../generated_images/Custom_test3.png>
-Package pdftex.def Info: ../generated_images/Custom_test3.png  used on input line 897.
+Package pdftex.def Info: ../generated_images/Custom_test3.png  used on input line 898.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
  [23 <../generated_images/Custom_test3.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 908--913
+Underfull \hbox (badness 10000) in paragraph at lines 909--914
 
  []
 
 <../report_images/tempered_smoothing.png, id=130, 803.0pt x 803.0pt>
 File: ../report_images/tempered_smoothing.png Graphic file (type png)
 <use ../report_images/tempered_smoothing.png>
-Package pdftex.def Info: ../report_images/tempered_smoothing.png  used on input line 914.
+Package pdftex.def Info: ../report_images/tempered_smoothing.png  used on input line 915.
 (pdftex.def)             Requested size: 160.59715pt x 160.59715pt.
 <../generated_images/MSE_test4.png, id=131, 462.528pt x 346.896pt>
 File: ../generated_images/MSE_test4.png Graphic file (type png)
 <use ../generated_images/MSE_test4.png>
-Package pdftex.def Info: ../generated_images/MSE_test4.png  used on input line 923.
+Package pdftex.def Info: ../generated_images/MSE_test4.png  used on input line 924.
 (pdftex.def)             Requested size: 231.26343pt x 173.44757pt.
 [24 <../report_images/tempered_smoothing.png> <../generated_images/MSE_test4.png>]
 File: ../report_images/boat_plot.png Graphic file (type png)
 <use ../report_images/boat_plot.png>
-Package pdftex.def Info: ../report_images/boat_plot.png  used on input line 931.
+Package pdftex.def Info: ../report_images/boat_plot.png  used on input line 932.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 File: ../report_images/noisy_boat_plot.png Graphic file (type png)
 <use ../report_images/noisy_boat_plot.png>
-Package pdftex.def Info: ../report_images/noisy_boat_plot.png  used on input line 936.
+Package pdftex.def Info: ../report_images/noisy_boat_plot.png  used on input line 937.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 <../generated_images/Custom_test4.png, id=137, 462.528pt x 346.896pt>
 File: ../generated_images/Custom_test4.png Graphic file (type png)
 <use ../generated_images/Custom_test4.png>
-Package pdftex.def Info: ../generated_images/Custom_test4.png  used on input line 941.
+Package pdftex.def Info: ../generated_images/Custom_test4.png  used on input line 942.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
  [25 <../generated_images/Custom_test4.png>]
 File: ../generated_images/Custom_test3.png Graphic file (type png)
 <use ../generated_images/Custom_test3.png>
-Package pdftex.def Info: ../generated_images/Custom_test3.png  used on input line 968.
+Package pdftex.def Info: ../generated_images/Custom_test3.png  used on input line 969.
 (pdftex.def)             Requested size: 345.0pt x 258.76335pt.
  [26]
-Underfull \hbox (badness 10000) in paragraph at lines 978--986
+Underfull \hbox (badness 10000) in paragraph at lines 979--987
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 987--999
+Underfull \hbox (badness 10000) in paragraph at lines 988--997
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1000--1010
+Underfull \hbox (badness 10000) in paragraph at lines 998--1008
 
  []
 
@@ -539,7 +539,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  67i,10n,77p,409b,584s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Report.pdf (28 pages, 919902 bytes).
+Output written on Report.pdf (28 pages, 919597 bytes).
 PDF statistics:
  214 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
