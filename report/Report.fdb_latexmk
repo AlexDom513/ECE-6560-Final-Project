@@ -1,15 +1,15 @@
 # Fdb version 4
-["pdflatex"] 1713839971.48695 "c:/Users/Admin/Desktop/School/Georgia Tech/Coursework/ECE 6560/Final Project/ECE-6560--Final-Project/report/Report.tex" "Report.pdf" "Report" 1713839973.40683 0
-  "../generated_images/Custom_test1.png" 1713759229 34784 6d92d935d7c4ce0bfde61dbd1c604912 ""
+["pdflatex"] 1713840376.41093 "c:/Users/Admin/Desktop/School/Georgia Tech/Coursework/ECE 6560/Final Project/ECE-6560--Final-Project/report/Report.tex" "Report.pdf" "Report" 1713840378.30582 0
+  "../generated_images/Custom_test1.png" 1713840277 33893 322899fe19aea92a54e8b15d5d4fa13c ""
   "../generated_images/Custom_test2.png" 1713760108 27807 a543c60bbe7065159beb048e84978160 ""
   "../generated_images/Custom_test3.png" 1713835194 26983 6b18d98b7b7395944607dbc53c41a46b ""
   "../generated_images/Custom_test4.png" 1713835482 29766 7534471a71d3ddb5fc49190b1b886375 ""
-  "../generated_images/LinearHeat_test1.png" 1713759227 28346 f4ad4555d712c435defaffaa57a1a48c ""
-  "../generated_images/MSE_test1.png" 1713759214 46011 4004b34646239866586f503f78045a99 ""
+  "../generated_images/LinearHeat_test1.png" 1713840269 28173 5e82001a74165a74102ff19b25e4ad0d ""
+  "../generated_images/MSE_test1.png" 1713840265 42557 725fc7d2c561f04950ffbfce95eeb6fc ""
   "../generated_images/MSE_test2.png" 1713760087 41760 e0949fbf1c434a706dff2855a454eb3d ""
   "../generated_images/MSE_test3.png" 1713835175 41890 ffdd1b8582440e74af8749c7dda02cfb ""
   "../generated_images/MSE_test4.png" 1713835466 43500 406f4141bdb84e5528f20aa1a7bb6936 ""
-  "../generated_images/TV_test1.png" 1713759228 25415 181f19cb7414070d98f1b7c34524100c ""
+  "../generated_images/TV_test1.png" 1713840273 25880 9b52c764f24bc869b094a1c6f2674204 ""
   "../report_images/aggressive_smoothing.png" 1713835070 52283 e2b6449956b149b813661c304f387191 ""
   "../report_images/baseline_smoothing.png" 1713718929 45624 2acb7bf45cfd02c00d17e7a380a990da ""
   "../report_images/boat_crop.png" 1713669245 57675 4a8df46ac4e1434b8801df048040b509 ""
@@ -88,9 +88,9 @@
   "C:/Users/Admin/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1710412547 29918 d08e4795c0778dfb000e82d9225c6ce2 ""
   "C:/Users/Admin/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Admin/AppData/Local/Programs/MiKTeX/tex/latex/xurl/xurl.sty" 1641733940 4675 e4b8c405820368c2dfb03526e16d725a ""
-  "Report.aux" 1713839973 1776 d23ddae05ab250b5b3b00157b32818cb "pdflatex"
-  "Report.tex" 1713839971 44644 849e7dbc29128df91490af84bb11f283 ""
-  "c:/Users/Admin/Desktop/School/Georgia Tech/Coursework/ECE 6560/Final Project/ECE-6560--Final-Project/report/Report.tex" 1713839971 44644 849e7dbc29128df91490af84bb11f283 ""
+  "Report.aux" 1713840378 1776 d23ddae05ab250b5b3b00157b32818cb "pdflatex"
+  "Report.tex" 1713840376 44644 d2112e461a4cba7e996f4b47b829a6e4 ""
+  "c:/Users/Admin/Desktop/School/Georgia Tech/Coursework/ECE 6560/Final Project/ECE-6560--Final-Project/report/Report.tex" 1713840376 44644 d2112e461a4cba7e996f4b47b829a6e4 ""
   (generated)
   "Report.aux"
   "Report.log"
