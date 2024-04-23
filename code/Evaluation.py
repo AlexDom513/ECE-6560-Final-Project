@@ -246,9 +246,10 @@ if __name__ == "__main__":
 
     ###### - Custom - ######
     E = 4
-    lambda_const = 90
-    beta_const = 4
-    c_const = 43
+    timestep = .1
+    lambda_const = 400
+    beta_const = 55
+    c_const = 150
     custom = Custom(img_path, timestep, iterations, E, lambda_const, beta_const, c_const)
     custom.run()
 
