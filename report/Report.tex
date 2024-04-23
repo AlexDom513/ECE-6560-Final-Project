@@ -205,7 +205,7 @@
 
   \noindent
   The corrputed image appears to differ in the range of 10 to 75.
-  Let's shape the energy functional so that pixels in the image that
+  Let's shape the energy functional so that pixels that
   fall in this range of gradients are smoothed. Thus, we
   can propose the following form for the penalty
   \begin{center}
@@ -217,8 +217,8 @@
 
   \noindent
   The goal of this penalty is to only have smoothing at the gradients
-  that are corrputing the image. By keeping a nearly flat penalty in the for
-  the higher gradients, we will greatly reduce the amount of diffusion that
+  that are corrupting the image. By keeping a nearly flat penalty for
+  the higher gradients, we will reduce the amount of diffusion that
   takes place along the edges.
 
 
@@ -453,7 +453,7 @@
   \end{center}
 
   \noindent
-  $f(x,t)$ can be elimnated on the right side of the equation by subtracting the 
+  $f(x,t)$ can be eliminated on the right side of the equation by subtracting the 
   first equation from the second. This introduces $-f(x,t)$ on the left hand side.
   Finally, we can divide by $\Delta t$.
   Note that the approximation also includes an error term $O(\Delta t)$.
@@ -648,7 +648,7 @@
     \vspace{12pt}
     $(\frac{I_{x}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xx}+I_{y}I_{xy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]+ $\\
     \vspace{12pt}
-    $(\frac{I_{yy}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xy} + I_{y}I_{yy}) (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
+    $[(\frac{I_{yy}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) - (\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{3}{2}}) (I_{x}I_{xy} + I_{y}I_{yy})] (\frac{e^\alpha}{(1+e^{\alpha})^2}) +$\\
     \vspace{12pt}
     $(\frac{I_{y}}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) [-\frac{1}{\beta} (e^\alpha) (\frac{1}{(I_{x}^2 + I_{y}^2 + \epsilon^2)^\frac{1}{2}}) (I_{x}I_{xy}+I_{y}I_{yy})] [(1+e^{\alpha})^{-2} + (e^\alpha)(-2(1+e^{\alpha})^{-3})]]$\\
     \vspace{12pt}
@@ -913,7 +913,7 @@
   \vspace{12pt}
 
   \noindent
-  As a result, we again see the MSE associated with the sigmoidal
+  We again see the MSE associated with the sigmoidal
   penalty decrease more slowly than that of the linear penalty.
 
   \begin{center}
