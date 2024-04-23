@@ -774,29 +774,34 @@
   In this test, the Custom PDE parameters are all set to one or zero to use 
   a penalty associated with a typical sigmoid.\\
   \begin{center}
-    \includegraphics[scale=0.1]{../report_images/baseline_smoothing.png}\\
+    \includegraphics[scale=0.2]{../report_images/baseline_smoothing.png}\\
   \end{center}
+  \vspace{12pt}
 
-  \noindent The mean square error is reduced more quickly for the sigmoidal penalty
-  compared to the linear penalty, however the result still shows acceptable
-  edge preservation characteristics.
+  \noindent 
+  In its base configuration, we see that the sigmoidal penalty is able to still
+  apply some smoothing to the image. However, the MSE  is dropping much more
+  slowly than the MSEs associated with the other penalties.
+
   \begin{center}
     \includegraphics[scale=.5]{../generated_images/MSE_test1.png}\\
   \end{center}
+
+  \newpage
   \begin{center}
     \begin{figure}[!htb]
       \begin{center}
-        \begin{subfigure}[b]{0.3\textwidth}
+        \begin{subfigure}[b]{0.5\textwidth}
           \includegraphics[width=\textwidth]{../report_images/boat_plot.png}
           \caption{Original Image}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{0.3\textwidth}
+        \begin{subfigure}[b]{0.5\textwidth}
           \includegraphics[width=\textwidth]{../report_images/noisy_boat_plot.png}
           \caption{Corrputed Image}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{0.3\textwidth}
+        \begin{subfigure}[b]{0.5\textwidth}
           \includegraphics[width=\textwidth]{../generated_images/Custom_test1.png}
           \caption{Smoothed Image}
         \end{subfigure}
@@ -811,32 +816,37 @@
   \noindent
   \textbf{2. ``Linear'' Smoothing}\\
   In this test, the Custom PDE parameters are set such that the sigmoidal penalty
-  traces the linear penalty before going flat.
+  traces the linear penalty before going flat.\\
   \begin{center}
-    \includegraphics[scale=0.1]{../report_images/linear_smoothing.png}\\
+    \includegraphics[scale=0.2]{../report_images/linear_smoothing.png}\\
   \end{center}
+  \vspace{12pt}
 
-  \noindent 
-  Compared to the previous test, we see that this image has a slightly
-  more pronounced edge at the top of the center window. Additionally,
-  the number of iterations required to reach the minimum MSE decreased.
+  \noindent
+  It is extremely intersting to see how the MSE associated with the
+  sigmoidal penalty closey follows the MSE of the linear penalty.
+  Examining the smoothing result on the next page, we can see that
+  we obtained a much better result than the previous test.
+
   \begin{center}
     \includegraphics[scale=0.5]{../generated_images/MSE_test2.png}\\
   \end{center}
+
+  \newpage
   \begin{center}
     \begin{figure}[!htb]
       \begin{center}
-        \begin{subfigure}[b]{0.3\textwidth}
+        \begin{subfigure}[b]{0.5\textwidth}
           \includegraphics[width=\textwidth]{../report_images/boat_plot.png}
           \caption{Original Image}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{0.3\textwidth}
+        \begin{subfigure}[b]{0.5\textwidth}
           \includegraphics[width=\textwidth]{../report_images/noisy_boat_plot.png}
           \caption{Corrputed Image}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{0.3\textwidth}
+        \begin{subfigure}[b]{0.5\textwidth}
           \includegraphics[width=\textwidth]{../generated_images/Custom_test2.png}
           \caption{Smoothed Image}
         \end{subfigure}
@@ -850,31 +860,40 @@
   \newpage
   \noindent
   \textbf{3. Aggressive Smoothing}\\
-  Custom PDE slope matching linear penalty for range 10 to 75.\\
+  In this test, the parameters were selected in such a way
+  that the sigmoidal penalty will only begin to go flat
+  around a magnitude gradient value of 200. This coincides
+  with the end of the magnitude gradient values we found during
+  the image analysis.\\
   \begin{center}
-    \includegraphics[scale=0.1]{../report_images/aggressive_smoothing.png}\\
+    \includegraphics[scale=0.2]{../report_images/aggressive_smoothing.png}\\
   \end{center}
+  \vspace{12pt}
 
-  \noindent The mean square error is reduced more quickly for the sigmoidal penalty
-  compared to the linear penalty, however the result still shows acceptable
-  edge preservation characteristics.
+  \noindent
+  This configuration yielded an excellent result. The MSE
+  associated with the sigmoidal penalty continues to
+  decrease even as we approach the 300th iteration.
+
   \begin{center}
     \includegraphics[scale=0.5]{../generated_images/MSE_test3.png}\\
   \end{center}
+
+  \newpage
   \begin{center}
     \begin{figure}[!htb]
       \begin{center}
-        \begin{subfigure}[b]{0.3\textwidth}
+        \begin{subfigure}[b]{0.5\textwidth}
           \includegraphics[width=\textwidth]{../report_images/boat_plot.png}
           \caption{Original Image}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{0.3\textwidth}
+        \begin{subfigure}[b]{0.5\textwidth}
           \includegraphics[width=\textwidth]{../report_images/noisy_boat_plot.png}
           \caption{Corrputed Image}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{0.3\textwidth}
+        \begin{subfigure}[b]{0.5\textwidth}
           \includegraphics[width=\textwidth]{../generated_images/Custom_test3.png}
           \caption{Smoothed Image}
         \end{subfigure}
@@ -888,31 +907,37 @@
   \newpage
   \noindent
   \textbf{4. Tempered Smoothing}\\
-  Custom PDE slope matching linear penalty for range 10 to 75.\\
+  In the final test, we relax the parameters so that the increasing
+  region of the sigmoidal penalty function has a lower slope
+  than the linear penalty.\\
   \begin{center}
-    \includegraphics[scale=0.1]{../report_images/tempered_smoothing.png}\\
+    \includegraphics[scale=0.2]{../report_images/tempered_smoothing.png}\\
   \end{center}
+  \vspace{12pt}
 
-  \noindent For this test the MSE plot seems to correspond to
-  test (1). After reaching the its minimum, the MSE begins to
-  increase at a rate less than what is seen in test (2) and (3).
+  \noindent
+  As a result, we again see the MSE associated with the sigmoidal
+  penalty decrease more slowly than that of the linear penalty.
+
   \begin{center}
     \includegraphics[scale=0.5]{../generated_images/MSE_test4.png}\\
   \end{center}
+
+  \newpage
   \begin{center}
     \begin{figure}[!htb]
       \begin{center}
-        \begin{subfigure}[b]{0.3\textwidth}
+        \begin{subfigure}[b]{0.5\textwidth}
           \includegraphics[width=\textwidth]{../report_images/boat_plot.png}
           \caption{Original Image}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{0.3\textwidth}
+        \begin{subfigure}[b]{0.5\textwidth}
           \includegraphics[width=\textwidth]{../report_images/noisy_boat_plot.png}
           \caption{Corrputed Image}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{0.3\textwidth}
+        \begin{subfigure}[b]{0.5\textwidth}
           \includegraphics[width=\textwidth]{../generated_images/Custom_test4.png}
           \caption{Smoothed Image}
         \end{subfigure}
